@@ -703,7 +703,9 @@ You nod.
 Jelena scoffs, &quot;I know a lot more than you do, //fremmed//.&quot; 
 
 [[You appologize.|What supplies?][$karma += 1]] 
-[[You change the conversation.|What supplies?][$karma -= 1]]</tw-passagedata><tw-passagedata pid="41" name="I hope we can work well together." tags="" position="1680,2229" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
+[[You change the conversation.|What supplies?][$karma -= 1]]
+
+&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="I hope we can work well together." tags="" position="1701,2241" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
 
 &quot;Remember that what I say goes,&quot; she tells you. &quot;You do; we live.&quot;
 
@@ -837,19 +839,21 @@ You continue getting ready. You&#39;re almost done packing your belongings when 
 [[&quot;How long will the visit be?&quot;]]
 </tw-passagedata><tw-passagedata pid="56" name="&quot;I thought you were an experienced guide?&quot;" tags="" position="1273,3466" size="100,100">Jelena scoffs, &quot;I am experienced. This stop is for safety purposes. Things have started changing out there quicker, and quicker. We need to know what we&#39;re walking into.&quot; 
 
-You don&#39;t question Jelena again, and the two of you begin to head towards [[the outskirts of town.]]</tw-passagedata><tw-passagedata pid="57" name="&quot;How long will the visit be?&quot;" tags="" position="1002,3462" size="100,100">&quot;The visit shouldn&#39;t take long,&quot; Jelena answers. &quot;We&#39;ll be out of Ved Fjellet by tomorrow at the latest.&quot; 
+You don&#39;t question Jelena again, and the two of you begin to head towards [[the outskirts of town.]]
+
+&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="&quot;How long will the visit be?&quot;" tags="" position="1002,3462" size="100,100">&quot;The visit shouldn&#39;t take long,&quot; Jelena answers. &quot;We&#39;ll be out of Ved Fjellet by tomorrow at the latest.&quot; 
 
 You nod and you and Jelena move on to [[the outskirts of town.]]</tw-passagedata><tw-passagedata pid="58" name="the outskirts of town." tags="" position="1140,3580" size="100,100">You and Jelena show up outside of a small house besides an icy bay. You don&#39;t think you&#39;ve ever seen so much snow and ice in your entire life. 
 
 Jelena approaches the house, &quot;C&#39;mon. Let&#39;s go inside.&quot; 
 
-[[&quot;I want to explore.&quot;]] 
-[[Follow Jelena.]] 
-</tw-passagedata><tw-passagedata pid="59" name="&quot;I want to explore.&quot;" tags="" position="1277,3730" size="100,100">&quot;I&#39;ll be right in,&quot; you tell her. &quot;I want to look around.&quot; 
+[[&quot;I want to explore.&quot;][$karma -=1]] 
+[[Follow Jelena.][$karma +=1]] 
+</tw-passagedata><tw-passagedata pid="59" name="&quot;I want to explore.&quot;" tags="" position="1276,3718" size="100,100">&quot;I&#39;ll be right in,&quot; you tell her. &quot;I want to look around.&quot; 
 
 Jelena looks at you warily, &quot;Don&#39;t go too far.&quot; 
 
-[[&quot;I won&#39;t.&quot;]]</tw-passagedata><tw-passagedata pid="60" name="Follow Jelena." tags="" position="951,3720" size="100,100">You follow Jelena into the house where an older couple greets you. 
+[[&quot;I won&#39;t.&quot;]]</tw-passagedata><tw-passagedata pid="60" name="Follow Jelena." tags="" position="1002,3710" size="100,100">You follow Jelena into the house where an older couple greets you. 
 
 &quot;Jelena,&quot; the older woman rushes forward and envelops Jelena in a big hug. &quot;We didn&#39;t know if you&#39;d still have time to see us before you left.&quot; 
 
@@ -857,7 +861,7 @@ Jelena looks at you warily, &quot;Don&#39;t go too far.&quot;
 
 Jelena turns towards you, &quot;This is Professor $name. They&#39;re from the Englene Institute, and they&#39;re here to study fantomet.&quot; 
 
-The woman smiles warmly at you, &quot;Hello Professor $name. My name is Olga, and this is my husband, Dan. Is there any way that we could [[help with your research?&quot;]]
+The woman smiles warmly at you, &quot;Hello Professor $name. My name is Olga, and this is my husband, Dan. Is there any way that we could [[help with your research?]]
 
 
 
@@ -890,8 +894,8 @@ You nod, &quot;It was a black and white dog. It looked terrified.&quot;
 
 The older couple exchange a look. &quot;That would be Rakker,&quot; The woman says. &quot;He&#39;s ours. He&#39;s always getting himself into trouble, but he can handle himself.&quot; 
 
-[[Argue with them.]] 
-[[Accept that they know better.]] </tw-passagedata><tw-passagedata pid="63" name="Try to save the dog." tags="" position="1790,3905" size="100,100">You have to save the dog. You try calling to the dog to get its attention. When that doesn&#39;t work, you run out onto the ice sheet and try to reach the dog quickly. But the dog sees you, and bolts in the opposite direction. 
+[[Argue with them.][$karma -=1]] 
+[[Accept that they know better.][$karma +=1]] </tw-passagedata><tw-passagedata pid="63" name="Try to save the dog." tags="" position="1790,3905" size="100,100">You have to save the dog. You try calling to the dog to get its attention. When that doesn&#39;t work, you run out onto the ice sheet and try to reach the dog quickly. But the dog sees you, and bolts in the opposite direction. 
 
 You continue to chase it, &quot;Come here! It&#39;s ok, I&#39;m trying to help you!&quot; 
 
@@ -903,20 +907,20 @@ You&#39;re so focused on trying to save the dog that you don&#39;t realize how f
 
 You can&#39;t see anything, and decide your only hope is to walk in one direction until you get past this fog. 
 
-Suddently, the hair on your neck stands on end, and you hear the dog whine loudly in the distance.
+You hear the dog whine loudly in the distance. Before you can react,  indistinct murmurs fill the air around you. The hair on the back on your neck stands up. 
 
 //Something is wrong.// 
 
-Before you can react, you see a thick wall of mist rushing towards you. 
+The last thing you see is a thick wall of mist rushing towards you. 
 
 &lt;&lt;else&gt;&gt;
 You can&#39;t see anything, and don&#39;t know what to do. You decide to dig around in your bag and use your flashlight to find your way back. 
 
-You pull out your flashlight, and turn it on. It&#39;s still very hard to see past the fog. Suddently, the hair on your neck stands on end, and you hear the dog whine loudly in the distance. 
+You pull out your flashlight, and turn it on. It&#39;s still very hard to see past the fog. You hear the dog whine loudly in the distance. Before you can react,  indistinct murmurs fill the air around you. The hair on the back on your neck stands up. 
 
 //Something is wrong.// 
 
-Before you can react, you see a thick wall of mist rushing towards you. 
+The last thing you see is a thick wall of mist rushing towards you. 
 
 &lt;&lt;/if&gt;&gt; 
 
@@ -937,13 +941,13 @@ Before you can react, you see a thick wall of mist rushing towards you.
 
 [[Accept that they know better.]] </tw-passagedata><tw-passagedata pid="68" name="&quot;Isn&#39;t the mist from the north?&quot;" tags="" position="1014,4194" size="100,100">&quot;The //Dimman// is from the edge of the world,&quot; The woman says. &quot;It used to stay there year-round, and could only be found in the north. Using fantomet is [[what draws it south.|You have no further questions.]]&quot; 
 
-</tw-passagedata><tw-passagedata pid="69" name="&quot;Why travel on the ice sheet?&quot;" tags="" position="1180,4400" size="100,100">&quot;It&#39;s like a highway,&quot; Jelena explains. &quot;If we travel across the land it will take longer and there will be more obstacles. The ice sheet will help us get up north up before the middle of winter, which is when the //Dimman// spreads the farthest and [[there&#39;s the most storms.|You have no further questions.]]&quot; 
+</tw-passagedata><tw-passagedata pid="69" name="&quot;Why travel on the ice sheet?&quot;" tags="" position="1199,4397" size="100,100">&quot;It&#39;s like a highway,&quot; Jelena explains. &quot;If we travel across the land it will take longer and there will be more obstacles. The ice sheet will help us get up north up before the middle of winter, which is when the //Dimman// spreads the farthest and [[there&#39;s the most storms.|You have no further questions.]]&quot; 
 
-</tw-passagedata><tw-passagedata pid="70" name="help with your research?&quot;" tags="" position="836,3840" size="100,100">You consider asking Olga and Dan some questions... 
+</tw-passagedata><tw-passagedata pid="70" name="help with your research?" tags="" position="836,3840" size="100,100">You consider asking Olga and Dan some questions... 
 
-[[The Dimman?|&quot;Isn&#39;t the mist from the north?&quot;]] 
+[[The Dimman?|&quot;Isn&#39;t the mist from the north?&quot;][$karma +=1]] 
 [[fantomet?]] 
-[[Advice?]] </tw-passagedata><tw-passagedata pid="71" name="Advice?" tags="" position="996,3901" size="100,100">&quot;Listen to Jelena out there,&quot; Olga says. &quot;She knows her way around the wilderness and can find landmarks out there without any map or guide.&quot; 
+[[Advice?][$karma +=1]] </tw-passagedata><tw-passagedata pid="71" name="Advice?" tags="" position="996,3901" size="100,100">&quot;Listen to Jelena out there,&quot; Olga says. &quot;She knows her way around the wilderness and can find landmarks out there without any map or guide.&quot; 
 
 &quot;And try to travel along the coastal section of the ice sheet,&quot; Dan adds. &quot;The //Dimman// is more present in the southwest communities of the island because of increased fantomet usage. We&#39;ve heard that many communities across the bay have had to migrate south this winter to avoid it.&quot; 
 
@@ -952,10 +956,256 @@ Before you can react, you see a thick wall of mist rushing towards you.
 
 &quot;Remember,&quot; he warns. &quot;Don&#39;t travel northwest along the ice sheet. Beware the //Dimman.//&quot; 
 
-You can only hope that you don&#39;t run into the //Dimman// [[on the icesheet.]] </tw-passagedata><tw-passagedata pid="74" name="on the icesheet." tags="" position="907,4579" size="100,100">You and Jelena are on the ice sheet. In the distance behind you, you can make out the mountains near Ved Fjellet. Ahead of you, you can faintly see the northern landmasses along the bay. 
+You can only hope that you don&#39;t run into the //Dimman// [[on the icesheet.]] </tw-passagedata><tw-passagedata pid="74" name="on the icesheet." tags="" position="902,4565" size="100,100">You and Jelena are on the ice sheet. In the distance behind you, you can make out the mountains near Ved Fjellet. Ahead of you, you can faintly see the northern landmasses along the bay. 
 
 It&#39;s foggier out now, though, and the sun is no longer directly overhead. 
-Jelena keeps walking ahead of you at a pace that is faster than you are used to. </tw-passagedata></tw-storydata>
+Jelena keeps walking ahead of you, faster than you are.
+
+You&#39;re about to lose sight of her.
+
+[[Ask her to slow down.]]
+&lt;&lt;if $inventory.indexOf(&quot;flashlight&quot;) != -1&gt;&gt;
+[[Try to use your flashlight.]]
+&lt;&lt;/if&gt;&gt;
+[[Try to run and catch up.]]</tw-passagedata><tw-passagedata pid="75" name="Ask her to slow down." tags="" position="901,4696" size="100,100">&quot;Jelena!&quot; You call out. Jelena&#39;s shadowy outline stops walking, and you think you see her turn around; Her figure moves back into view. 
+
+&quot;Sorry,&quot; Jelena appologizes. &quot;I forgot you&#39;re not used to travelling across this type of terrain.&quot; 
+
+You continue on, and Jelena [[matches her pace to yours.|you live]] </tw-passagedata><tw-passagedata pid="76" name="Try to use your flashlight." tags="" position="700,4696" size="100,100">You start to panic, and don&#39;t want Jelena to get to far ahead. Maybe using your flashlight could help? 
+
+You dig through your bag and pull out your fantomet-powered flashlight. 
+The second you turn it on you see Jelena&#39;s outline rushing towards you. 
+
+&quot;No!&quot; She shouts. You see her hands reaching out to the flashlight in your hand. 
+
+Before you can react, you hear indistinct murmurs fill the air around you. The hair on the back on your neck stands up. 
+
+The last thing you see is a wall of mist rushing towards you both. 
+
+[[---|death 2]]</tw-passagedata><tw-passagedata pid="77" name="Try to run and catch up." tags="" position="1102,4696" size="100,100">You try to run and catch up to Jelena, and realize too late that you&#39;re not at all used to running in such a snowy, and icy environment. You feel your feet flying out from beneath you, and you painfuly land on the ice. 
+
+Jelena hears your fall, and [[rushes back to help you.]]
+
+&lt;&lt;set $hasFallen to true&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="you live" tags="" position="901,4994" size="100,100">The two of you make it off the ice sheet as the sun is setting. 
+
+&quot;I know a place we can set up camp for tonight,&quot; Jelena says. &quot;It&#39;s not too far from here. We should make it there before it gets too dark.&quot; 
+
+You follow Jelena [[further into the unknown.|the camp]]
+</tw-passagedata><tw-passagedata pid="79" name="death 2" tags="" position="407,4293" size="100,100">You died. Using your fantomet powered flashlight drew the //Dimman// too close to the two of you.  </tw-passagedata><tw-passagedata pid="80" name="rushes back to help you." tags="" position="1102,4846" size="100,100">&lt;&lt;if $karma &gt; -3&gt;&gt; 
+&quot;Idiot,&quot; mutters under her breath. &quot;Of course a //fremmed// like you wouldn&#39;t know how to walk without injuring yourslef.&quot; 
+
+Jelena looks at you, trying to assess the damage of your fall. &quot;Try not to get injured again in the future. Injuries out here mean certain death.&quot; 
+
+You&#39;ll have to be more careful in the future.
+
+&lt;&lt;/if&gt;&gt;
+
+&quot;Are you ok?&quot; Jelena looks down at you, trying to asses the damage of your fall. 
+
+You nod. &quot;I&#39;m fine to continue.&quot; 
+
+&quot;I&#39;ll walk slower,&quot; Jelena says. &quot;I forgot you&#39;re not used to travelling across this type of terrain. In the future, let me know if you need help, or if you need time to catch up.&quot; 
+
+You continue on, and Jelena [[matches her pace to yours.|you live]]</tw-passagedata><tw-passagedata pid="81" name="the camp" tags="" position="901,5144" size="100,100">Jelena&#39;s choice campsite is within a forest, and is farther inland from the ice sheet. 
+
+&quot;We&#39;re here,&quot; she says. &quot;Time to set-up camp.&quot;
+
+Jelena immediately begins sifting through your bags to prepare your make-shift camp. 
+
+[[&quot;Where&#39;s here?&quot;]] 
+[[&quot;How long will we be here?&quot;]] 
+
+</tw-passagedata><tw-passagedata pid="82" name="&quot;Where&#39;s here?&quot;" tags="" position="826,5294" size="100,100">&quot;Here is home, until I decide that it isn&#39;t.&quot; Jelena says. &quot;We&#39;ll be here for tonight, and maybe tomorrow. I need to figure out how much the landscape has changed since I&#39;ve been here: where the best food sources are, and which areas are still off-limits.&quot; 
+
+&quot;You&#39;ve been here before?&quot; 
+
+&lt;&lt;if $hasQuestioned&gt;&gt;
+
+&quot;Of course I have,&quot; Jelena rummages through her pack. &quot;How many times do I need to tell you I have experience?&quot; 
+
+&lt;&lt;else&gt;&gt; 
+
+&quot;Of course I have,&quot; Jelena sighs while rummaging through her pack. &quot;It&#39;s just been a while since I&#39;ve been here, but I know this area like the back of my hand. I don&#39;t need a map or compass to tell me where I am, I just know.&quot; 
+
+&lt;&lt;/if&gt;&gt; 
+
+&lt;&lt;if $karma -= -4&gt;&gt; 
+
+[[&quot;We shouldn&#39;t have to scope the area if you know it.&quot;][$karma -=1]] 
+[[&quot;You&#39;re clearly inexperienced...&quot;][$karma -=2]]
+[[Appologize, and move on.][$karma +=2]] 
+
+&lt;&lt;else&gt;&gt;
+
+[[Appologize, and move on.][$karma +=2]] 
+
+&lt;&lt;/if&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="83" name="&quot;How long will we be here?&quot;" tags="" position="976,5294" size="100,100">&quot;I haven&#39;t figured that out yet,&quot; Jelena tells you. &quot;I need to figure out the next safest path for use to take, and I don&#39;t know how much the landscape has changed around here since my last trip.&quot; 
+ 
+&lt;&lt;if $karma -= -4&gt;&gt; 
+
+[[&quot;You&#39;re clearly inexperienced...&quot;][$karma -= 2]] 
+[[Nod.]]
+
+&lt;&lt;else&gt;&gt; 
+
+[[&quot;Changed?&quot;][$karma += 1]]
+[[Nod.]]
+
+&lt;&lt;/if&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="84" name="&quot;We shouldn&#39;t have to scope the area if you know it.&quot;" tags="" position="565,5498" size="100,100">Jelena stiffens at your comment. 
+
+&quot;It&#39;s been a while since I&#39;ve been here, but I can assure you that I know this area better than I know myself. I know every landmark, plant, and animal from this region,&quot; Jelena says softly. &quot;My main concerns are the //Dimman//. It&#39;s too uncertain to track, and I won&#39;t be careless with either of our lives when moving forward on this trip.&quot; 
+
+Before you can think and say anything else, Jelena continues speaking. 
+
+&quot;We have a long day ahead of us tomorrow,&quot; Jelena says. &quot;The sooner we get to sleep, the better.&quot; 
+
+[[All you do is nod.|The attack]]
+&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="85" name="&quot;You&#39;re clearly inexperienced...&quot;" tags="" position="732,5496" size="100,100">Your blood begins to boil.
+&quot;You&#39;re clearly inexperienced!&quot; You shout. &quot;You didn&#39;t even scope the terrirotry properly before meeting me! You should have had everything done weeks in advance. You&#39;re no professional. I&#39;m amazed that Englene even hired you.&quot; 
+
+Jelena stiffens, and stops going through the bags. 
+
+&quot;It&#39;s been a while since I&#39;ve been here, but I can assure you that I know this area better than I know myself. I know every landmark, plant, and animal from this region.&quot; Jelena says softly. &quot;My main concerns are the //Dimman//. It&#39;s too uncertain to track, and I won&#39;t be careless with either of our lives when moving forward on this trip.&quot; 
+
+Before you can think and say anything else, Jelena continues speaking. 
+
+&quot;We have a long day ahead of us tomorrow,&quot; Jelena says. &quot;The sooner we get to sleep, the better.&quot; 
+
+[[All you do is nod.|The attack]]
+
+&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="86" name="Appologize, and move on." tags="" position="928,5493" size="100,100">&quot;I&#39;m sorry,&quot; You appologize. &quot;I won&#39;t question you anymore.&quot; 
+
+Jelena nods, and she looks a little greatful.
+
+&quot;I&#39;m going to set up camp,&quot; She says. &quot;We&#39;ve got a long day ahead of us tomorrow.&quot; 
+
+[[You nod.|The attack]]
+</tw-passagedata><tw-passagedata pid="87" name="&quot;Changed?&quot;" tags="" position="1302,5492" size="100,100">&quot;Things aren&#39;t what they used to be,&quot; Jelena sighs. &quot;The //Dimman// has caused a lot of displacement. The land isn&#39;t managed the same way, because of that. And some places are constantly covered by the //Dimman// regardless of the season. [[Everything is uncertain, now.&quot;|The attack]]</tw-passagedata><tw-passagedata pid="88" name="Nod." tags="" position="1126,5494" size="100,100">Jelena is your biggest lifeline on this trip. You need to trust her. 
+
+&quot;We have a long day ahead of us tomorrow,&quot; Jelena says. &quot;The sooner we get to sleep, the better.&quot; 
+
+[[You nod again.|The attack]]</tw-passagedata><tw-passagedata pid="89" name="The attack" tags="" position="899,5699" size="100,100">You and Jelena finish setting up your camp, and the two of you settle in front of a fire that Jelena started. 
+
+You decide to record some notes and details of your journey so far. 
+
+You pull out a non-fantomet powered recording device from your bag. 
+
+&quot;Today has been an interesting day,&quot; You begin speaking about everything you can remember while Jelena wordlessly stares off in the distance. 
+&lt;&lt;if $hasFallen&gt;&gt; 
+&quot;...things haven&#39;t gone smoothly. Earlier today, I fell and was injured. It was a lesson to be more careful in the future, though,&quot; you continue. 
+&lt;&lt;else&gt;&gt; 
+&quot;...things have been going smoothly enough. My guide and I are in good health; Neither of us has gotten injured so far...&quot; you continue. 
+&lt;&lt;/if&gt;&gt; 
+&quot;Sh,&quot; Jelena says suddenly. 
+&lt;&lt;if $karma &gt; 2&gt;&gt; 
+You immediately stop talking. The hairs on the back of your neck raise as you put your recorder away, freeing your hands. 
+&lt;&lt;else&gt;&gt; 
+“Excuse me, it is important for my research to record daily—”
+&lt;&lt;/if&gt;&gt;
+You still as something snaps a branch out in the forest. Neither of you moves. 
+
+Howls shattered the silence. You&#39;ve been found by bear-wolves. 
+
+“Climb!” Yelana shouts, already putting words to action, tossing yours and her bags over the branches before vaulting up herself. She reaches down to help you up.
+&lt;&lt;if $karma &gt;2&gt;&gt; 
+You grasp her hand, and your arm is nearly yanked out of your shoulder. You feel the wind as [[snouts snap inches from your feet.|in the tree]]
+&lt;&lt;else&gt;&gt; 
+But you fumble with your phone and feel teeth sink into your leg. You scream.
+
+[[It doesn’t last long.|death 3]]
+&lt;&lt;/if&gt;&gt;
+
+
+
+
+
+
+
+
+
+
+</tw-passagedata><tw-passagedata pid="90" name="in the tree" tags="" position="900,5834" size="100,100">“We’re sleeping up here,” she says. 
+
+&quot;Can&#39;t they climb trees?&quot; You pant. 
+
+&quot;No,&quot; Jelena answers.
+
+&quot;But bears-&quot; you protest. 
+
+&quot;//Bjørnulves// are bigger than most bears, so they can&#39;t climb trees like them.&quot; Jelena explains. &quot;Also they come from farther north and don&#39;t live around trees, so they don&#39;t know how to climb either.&quot; 
+
+&quot;Won&#39;t they try to wait us out?&quot; You ask. 
+
+Jelena says nothing. You nudge her and repeat yourself. 
+
+&quot;They shouldn&#39;t,&quot; she responds softly, sounding lost. &quot;They&#39;re impatient. They&#39;ll exhaust their energy, then go.&quot;
+
+Jelena continues staring down at the hulking figures circling the trees, and mumbles something to herself. 
+
+&quot;What did you say?&quot; You ask her. 
+
+&quot;They shouldn&#39;t be this far south,&quot; she says louder, still watching them. &quot;I&#39;ve never seen a //Bjørnulve// this far south. The //Dimman// doesn&#39;t hurt them, so they usually won&#39;t leave the northern region of the island...they would only move south to follow their food, which means the other animals must be moving south, too...&quot; 
+
+Jelena&#39;s voice trails off. You decide to give her time to think. 
+
+You&#39;re so exhausted that you drift off to sleep in the tree. 
+
+[[The next morning.]] 
+
+
+
+</tw-passagedata><tw-passagedata pid="91" name="death 3" tags="" position="1999,5603" size="100,100">The </tw-passagedata><tw-passagedata pid="92" name="The next morning." tags="" position="901,5984" size="100,100">You wake up the next morning, and your entire body aches. 
+&lt;&lt;if $hasFallen&gt;&gt; 
+You shouldn&#39;t have run on the ice sheet the other day. You tentatively try to check the injuries you sustained yesterday. 
+&lt;&lt;else&gt;&gt; 
+You&#39;re still exhausted from yesterday, but you&#39;re thankful that you haven&#39;t been injured, or killed, yet on this trip.
+&lt;&lt;/if&gt;&gt;
+Jelena is already awake, and is staring down at your make-shift camp below. 
+&lt;&lt;if $hasArgued&gt;&gt; 
+You immediately remember your argument last night, and your cheeks flood with warmth. Even after everything, though, Jelena saved your life...you hope you can make things right between you in the future. 
+&lt;&lt;else&gt;&gt; 
+You immediately remember the events of last night: You were attacked by bear-wolves, and Jelena saved your life. You can&#39;t help but feel gratitude. 
+&lt;&lt;/if&gt;&gt; 
+Jelena speaks before you can think to say anything, &quot;They&#39;re gone.&quot; 
+
+You look down at the camp, and there&#39;s surprisingly little damage to what was left behing during the attack.  
+
+&quot;We should get moving soon,&quot; Jelena says. &quot;The sooner this trip is done, the better.&quot; 
+
+[[&quot;What happened to scoping out the area?&quot;][$karma -=1]]
+[[&quot;I agree.&quot;][$karma +=1]]</tw-passagedata><tw-passagedata pid="93" name="&quot;What happened to scoping out the area?&quot;" tags="" position="799,6094" size="100,100">&quot;If the //bjørnulves// are so far south, that can only mean the //Dimman// is rolling in farther than it usually does, and earlier than it usually does,&quot; Jelena says. &quot;We have less time than I originally anticipated, so we need to move quicker.&quot; 
+
+[[You agree with Jelena&#39;s judgement|&quot;I agree.&quot;]] 
+[[Question her judgement.]] </tw-passagedata><tw-passagedata pid="94" name="&quot;I agree.&quot;" tags="" position="998,6099" size="100,100">You agree with Jelena&#39;s judgement, &quot;You&#39;re right. It&#39;s getting dangerous out here. I wouldn&#39;t want anything bad to happen to either of us.&quot; 
+&lt;&lt;if $hasArgued&gt;&gt;
+Jelena smiles, &quot;I&#39;m glad we can finally agree on something.&quot; 
+&lt;&lt;else&gt;&gt; 
+Jelena nods appreciatively, &quot;I&#39;m glad you agree.&quot; 
+&lt;&lt;/if&gt;&gt; 
+[[Let&#39;s get out of this tree.]]
+</tw-passagedata><tw-passagedata pid="95" name="Question her judgement." tags="" position="787,6230" size="100,100">&quot;Like I said last night,&quot; Jelena says, &quot;this trip is getting increasingly dangerous. It was already dangerous because of the //Dimman//, but there are //bjørnulves// in the area now, too. Staying out here longer isn&#39;t an option anymore.&quot; 
+
+&quot;But what about safety-&quot; 
+
+&quot;If you&#39;re concerned about safety, then we should turn back.&quot; 
+
+[[Go back to Ved Fjellet.|You fail]]
+[[&quot;Turning back is not an option&quot;|Let&#39;s get out of this tree.]]</tw-passagedata><tw-passagedata pid="96" name="Let&#39;s get out of this tree." tags="" position="903,6331" size="100,100">You and Jelena climb out of the tree, and pack up your belongings. 
+
+&quot;Where are we going now?&quot; You ask Jelena. 
+
+Jelena slings her bag over her shoulder. 
+
+&quot;There&#39;s an abandonned village not too far from here,&quot; she says. &quot;It&#39;s near a sizeable fantomet deposit.&quot; 
+
+[[Let&#39;s go.|The village]] 
+[[&quot;How long will it take to get there?&quot;]]</tw-passagedata><tw-passagedata pid="97" name="You fail" tags="" position="104,5896" size="100,100">You have failed your mission. You did not study fantomet, and return with no samples for the Englene Institute of Research.</tw-passagedata><tw-passagedata pid="98" name="&quot;How long will it take to get there?&quot;" tags="" position="1072,6330" size="100,100">&quot;We&#39;ll be able to reach the village by nightfall,&quot; Jelena answers. &quot;I think we should rest there over night, and get the samples in the morning before heading back.&quot;
+
+[[&quot;Let&#39;s go.&quot;|The village]]</tw-passagedata><tw-passagedata pid="99" name="The village" tags="" position="896,6495" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="\\s"===e?"\\S":e.replace(/^\[/,"[^"),r="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",n=r.replace("\\-",""),a=function(){return"("+r+"+)\\(([^\\)\\|\\n]+)\\):|("+r+"+):([^;\\|\\n]+);|((?:\\."+r+"+)+);|((?:#"+r+"+)+);"}();return Object.freeze({space:e,spaceNoTerminator:"[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:t,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:r,anyLetterStrict:n,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:a,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){!function(e){if(e&&e.prototype&&null==e.prototype.firstElementChild){var t=Node.ELEMENT_NODE;Object.defineProperty(e.prototype,"firstElementChild",{get:function(){for(var e=this.childNodes,r=0;r<e.length;++r){var n=e[r];if(n.nodeType===t)return n}return null}})}}(window.Node||window.Element)}(),function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=e&&function(){try{var e=document.createElement("audio").play();return e.catch(function(){}),e instanceof Promise}catch(e){}return!1}(),r=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),n=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),a=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),i=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),o=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),s=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,audioPromise:t,fileAPI:r,geolocation:n,mutationObserver:a,performance:i,touch:o,transitionEndEvent:s})}(),Visibility=function(){function e(){return Boolean(r&&document[r.hiddenProperty])}function t(){return r&&document[r.stateProperty]||"visible"}var r=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return null}();return Object.freeze(Object.defineProperties({},{isHidden:{value:e},state:{value:t},hiddenProperty:{value:r.hiddenProperty},stateProperty:{value:r.stateProperty},changeEvent:{value:r.changeEvent}}))}(),_ref3=function(){function e(t){if("object"!==(void 0===t?"undefined":_typeof(t))||null===t)return t;if(t instanceof String)return String(t);if(t instanceof Number)return Number(t);if(t instanceof Boolean)return Boolean(t);if("function"==typeof t.clone)return t.clone(!0);if(t.nodeType&&"function"==typeof t.cloneNode)return t.cloneNode(!0);var r=void 0;return t instanceof Array?r=new Array(t.length):t instanceof Date?r=new Date(t.getTime()):t instanceof Map?(r=new Map,t.forEach(function(t,n){return r.set(n,e(t))})):t instanceof RegExp?r=new RegExp(t):t instanceof Set?(r=new Set,t.forEach(function(t){return r.add(e(t))})):r=Object.create(Object.getPrototypeOf(t)),Object.keys(t).forEach(function(n){return r[n]=e(t[n])}),r}function t(e){for(var t=document.createDocumentFragment(),r=document.createElement("p"),n=void 0;null!==(n=e.firstChild);){if(n.nodeType===Node.ELEMENT_NODE){switch(n.nodeName.toUpperCase()){case"BR":if(null!==n.nextSibling&&n.nextSibling.nodeType===Node.ELEMENT_NODE&&"BR"===n.nextSibling.nodeName.toUpperCase()){e.removeChild(n.nextSibling),e.removeChild(n),t.appendChild(r),r=document.createElement("p");continue}if(!r.hasChildNodes()){e.removeChild(n);continue}break;case"ADDRESS":case"ARTICLE":case"ASIDE":case"BLOCKQUOTE":case"CENTER":case"DIV":case"DL":case"FIGURE":case"FOOTER":case"FORM":case"H1":case"H2":case"H3":case"H4":case"H5":case"H6":case"HEADER":case"HR":case"MAIN":case"NAV":case"OL":case"P":case"PRE":case"SECTION":case"TABLE":case"UL":r.hasChildNodes()&&(t.appendChild(r),r=document.createElement("p")),t.appendChild(n);continue}}r.appendChild(n)}r.hasChildNodes()&&t.appendChild(r),e.appendChild(t)}function r(){try{return document.activeElement||null}catch(e){return null}}function n(e,t,r){var n="object"===(void 0===e?"undefined":_typeof(e))?e:document.getElementById(e);if(null==n)return null;var a=Array.isArray(t)?t:[t];jQuery(n).empty();for(var i=0,o=a.length;i<o;++i)if(Story.has(a[i]))return new Wikifier(n,Story.get(a[i]).processText().trim()),n;if(null!=r){var s=String(r).trim();""!==s&&new Wikifier(n,s)}return n}function a(e,t,r){var n=jQuery(document.createElement("div")),a=jQuery(document.createElement("button")),i=jQuery(document.createElement("pre")),o=L10n.get("errorTitle")+": "+(t||"unknown error");return a.addClass("error-toggle").ariaClick({label:L10n.get("errorToggle")},function(){a.hasClass("enabled")?(a.removeClass("enabled"),i.attr({"aria-hidden":!0,hidden:"hidden"})):(a.addClass("enabled"),i.removeAttr("aria-hidden hidden"))}).appendTo(n),jQuery(document.createElement("span")).addClass("error").text(o).appendTo(n),jQuery(document.createElement("code")).text(r).appendTo(i),i.addClass("error-source").attr({"aria-hidden":!0,hidden:"hidden"}).appendTo(n),n.addClass("error-view").appendTo(e),console.warn(o+"\n\t"+r.replace(/\n/g,"\n\t")),!1}function i(e,t){var r=i;switch(void 0===e?"undefined":_typeof(e)){case"number":if(Number.isNaN(e))return t;break;case"object":if(null===e)return t;if(Array.isArray(e))return e.map(function(e){return r(e,t)}).join(", ");if(e instanceof Set)return[].concat(_toConsumableArray(e)).map(function(e){return r(e,t)}).join(", ");if(e instanceof Map){return"{ "+[].concat(_toConsumableArray(e)).map(function(e){var n=_slicedToArray(e,2),a=n[0],i=n[1];return r(a,t)+" → "+r(i,t)}).join(", ")+" }"}return e instanceof Date?e.toLocaleString():"function"==typeof e.toString?e.toString():Object.prototype.toString.call(e);case"function":case"undefined":return t}return String(e)}return Object.freeze(Object.defineProperties({},{clone:{value:e},convertBreaks:{value:t},safeActiveElement:{value:r},setPageElement:{value:n},throwError:{value:a},toStringOrDefault:{value:i}}))
