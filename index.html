@@ -109,7 +109,14 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 @import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Redressed&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Calligraffitti&display=swap');
-
+img {
+ max-height: 100%;
+ max-width: 100%;
+}
+#ui-bar {
+  background-image: linear-gradient(to right, #00274d, #003366);
+  font-family: 'Mirza', sans-serif;
+}
 body {
 background-image: linear-gradient(to right, #004080, #339999);
 color: lightgrey;
@@ -117,10 +124,6 @@ font-family: 'Mirza', sans-serif;
 }
 #ui-bar-history, #menu-item-saves, .hidden {
 	display: none;
-}
-#ui-bar {
-    background-image: linear-gradient(to right, #00274d, #003366);
-  font-family: 'Mirza', sans-serif;
 }
 #menu ul {
  border: 1px solid #454545; 
@@ -231,7 +234,9 @@ body.letter .passage {
   font-family: inherit;
   font-weight: bold;
   text-decoration: underline;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Begin Inventory Macros
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+// Begin Inventory Macros
 // Original macros by F2Andy: http://strugglingwithtwine.blogspot.ca/2014/03/handling-inventory.html
 //
 // Instructions:
@@ -301,7 +306,7 @@ macros.inv = {
     if (state.active.variables.inventory.length == 0) {
       new Wikifier(place, 'nothing');
     } else {
-      new Wikifier(place, state.active.variables.inventory.join(','));
+      new Wikifier(place, state.active.variables.inventory.join(', '));
     }
   }
 };
@@ -352,6 +357,8 @@ We look forward to your findings,
 [[Start again at your arrival-&gt;landed]]</tw-passagedata><tw-passagedata pid="4" name="landed" tags="" position="900,399" size="100,100">&lt;&lt;set $karma = 0&gt;&gt;&lt;&lt;emptyInv&gt;&gt;&lt;&lt;addToInv &quot;world map&quot;&gt;&gt;&lt;&lt;addToInv flashlight&gt;&gt;&lt;&lt;addToInv &quot;recording device&quot;&gt;&gt;Your first flight out arrives on the edges of the farthest nation you can name. Your next flight, you can&#39;t conclusively tell if it’s powered by fantomet or just propellers and determination. 
 
 You land besides a bay, and mist clings to the landscape surrounding you. So this is the island of Grenseøya. 
+
+[img[bay|https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/landed.jpg]]
 
 You can’t help but think that Grenseøya looks...
 
@@ -491,6 +498,7 @@ Oskar departs, leaving you at &quot;Anja&#39;s.&quot; Your guide isn&#39;t here 
 [[Start shopping without them.]] 
 [[Wait for your guide to help you choose supplies.]]</tw-passagedata><tw-passagedata pid="20" name="Inventory" tags="" position="701,300" size="100,100">&lt;&lt;if $inventory.length == 0&gt;&gt;You are not carrying anything.&lt;&lt;else&gt;&gt;You are carrying:
 &lt;&lt;inv&gt;&gt; &lt;&lt;endif&gt;&gt;
+
 Money: &lt;&lt;if $hasMoney&gt;&gt;$money tomet
 &lt;&lt;else&gt;&gt;Jelena has it&lt;&lt;/if&gt;&gt;
 &lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="StoryInit" tags="" position="400,102" size="100,100">&lt;&lt;initInv&gt;&gt;
@@ -1884,12 +1892,24 @@ You&#39;re too tired to argue, and you eventually [[fall asleep.|finding fantome
 [[You have no further questions and thank Oskar.-&gt;Thanks, Oskar.]]&gt;&gt;
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Map" tags="" position="297.33333333333326,298.3333333333333" size="100,100">&lt;&lt;button [img[World Map|/images/world_map.png]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;if $inventory.indexOf(&quot;region map&quot; != -1)&gt;&gt;
-&lt;&lt;button [img[World Map|/images/map_island.png]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;endif&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Map" tags="" position="297.33333333333326,298.3333333333333" size="100,100">&lt;html&gt;
+&lt;button onclick=&quot;toggleHidden(&#39;map_world&#39;)&quot;&gt;World Map&lt;/button&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/map_world.png&quot; class=&quot;hidden&quot; id=&quot;map_world&quot;&gt;
+&lt;script&gt;function toggleHidden(id) {
+    let element = document.getElementById(id);
+  	element.classList.toggle(&quot;hidden&quot;);
+}&lt;/script&gt;
+&lt;/html&gt;
+&lt;&lt;if $inventory.indexOf(&quot;island map&quot;) != -1&gt;&gt;
+&lt;html&gt;
+&lt;button onclick=&quot;toggleHidden(&#39;map_island&#39;)&quot;&gt;Island Map&lt;/button&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/map_island.png&quot; class=&quot;hidden&quot; id=&quot;map_island&quot;&gt;
 
-&lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="guide-doubt2" tags="" position="499,2797" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
+&lt;/html&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;back&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="103" name="guide-doubt2" tags="" position="499,2797" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
 
 &quot;You&#39;re really young,&quot; You comment. &quot;Are you sure you can handle things out there? I need a guide with a lot of experience.&quot; 
 
