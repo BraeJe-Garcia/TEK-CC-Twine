@@ -136,11 +136,19 @@ font-family: 'Mirza', sans-serif;
   font-weight: normal;
   color: grey;
 }
+.song {
+ font-style: italic; 
+ color: white;
+}
 .fantasy {
   font-family: 'Seaweed Script', cursive;
 }
-.bad-end {
+body.death {
+  background: black;
+}
+body.death .passage {
   font-family: 'Trade Winds', serif;
+  color: grey;
 }
 .start {
  	
@@ -322,7 +330,7 @@ We look forward to your findings,
 
 [[Continue-&gt;landed]]</tw-passagedata><tw-passagedata pid="3" name="StoryCaption" tags="" position="600,102" size="100,100">[[Inventory]]
 [[Map]]
-[[Start again at your arrival-&gt;landed]]</tw-passagedata><tw-passagedata pid="4" name="landed" tags="" position="900,399" size="100,100">Your first flight out arrives on the edges of the farthest nation you can name. Your next flight, you can&#39;t conclusively tell if it’s powered by fantomet or just propellers and determination. 
+[[Start again at your arrival-&gt;landed]]</tw-passagedata><tw-passagedata pid="4" name="landed" tags="" position="900,399" size="100,100">&lt;&lt;set $karma = 0&gt;&gt;Your first flight out arrives on the edges of the farthest nation you can name. Your next flight, you can&#39;t conclusively tell if it’s powered by fantomet or just propellers and determination. 
 
 Your second flight lands besides a bay, and mist clings to the landscape surrounding you. You&#39;ve arrived on the island of Grenseøya. You can’t help but think that the island looks-
 
@@ -496,6 +504,7 @@ Oskar departs, leaving you at &quot;Anja&#39;s.&quot; Your guide isn&#39;t here 
 [[Start shopping without them.]] 
 [[Wait for your guide to help you choose supplies.]]</tw-passagedata><tw-passagedata pid="21" name="Inventory" tags="" position="701,300" size="100,100">&lt;&lt;if $inventory.length == 0&gt;&gt;You are not carrying anything.&lt;&lt;else&gt;&gt;You are carrying:
 &lt;&lt;invWithLinks&gt;&gt; &lt;&lt;endif&gt;&gt;
+Money: $money tomet
 &lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="StoryInit" tags="" position="400,102" size="100,100">&lt;&lt;initInv&gt;&gt;
 &lt;&lt;addToInv flashlight&gt;&gt;
 
@@ -507,9 +516,10 @@ Oskar departs, leaving you at &quot;Anja&#39;s.&quot; Your guide isn&#39;t here 
 &lt;&lt;set $name = &quot;&quot;&gt;&gt;
 
 &lt;&lt;set $questions2 = 0&gt;&gt;
-&lt;&lt;set $guide = false&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Start shopping without them." tags="" position="697,2099" size="100,100">Upon entering the stor, you notice it&#39;s small but cozy. Some clothes are hanging on hooks on the walls, and other miscellaneaous objects are proudly displayed on well-worn shelves. There&#39;s an older woman sitting behind a counter at the front of the room. 
+&lt;&lt;set $guide = false&gt;&gt;
+&lt;&lt;set $money = 500&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Start shopping without them." tags="" position="700.3333333333334,2100.6666666666665" size="100,100">Upon entering the store, you notice it&#39;s small but cozy. Some clothes are hanging on hooks on the walls, and other miscellaneaous objects are proudly displayed on well-worn shelves. There&#39;s an older woman sitting behind a counter at the front of the room. 
 
-&quot;Hello,&quot; She smiles at you. &quot;Can I help you with anything?&quot; 
+&quot;Hello,&quot; she smiles at you. &quot;Can I help you with anything?&quot; 
 
 [[Yes, thank you.|She runs down a list of items.]] 
 [[I&#39;m just browsing.|She runs down a list of items.]]</tw-passagedata><tw-passagedata pid="24" name="Wait for your guide to help you choose supplies." tags="" position="1002,2100" size="100,100">You decide to wait for your guide. Maybe they can help you choose supplies. It&#39;s cold, though. 
@@ -538,7 +548,6 @@ The list:
 
 Extra clothes: 
 Fur Coat (50 tomet) &lt;&lt;checkbox &quot;$hasFurCoat&quot; false true&gt;&gt;
-&lt;&lt;if $hasFurCoat&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fur Coat&quot;)&gt;&gt;
 &lt;&lt;set $money -= 50&gt;&gt;
 &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -954,7 +963,7 @@ The last thing you see is a thick wall of mist rushing towards you.
 [[...|death 1]]
 
 
-</tw-passagedata><tw-passagedata pid="60" name="death 1" tags="death" position="202,4499.666666666667" size="100,100">You disregarded Jelena&#39;s warnings, and wandered into its veil, so ends your tale.
+</tw-passagedata><tw-passagedata pid="60" name="death 1" tags="death" position="202,4499.666666666667" size="100,100">You disregarded Jelena&#39;s warnings and went too far north.
 
 &lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Argue with them." tags="" position="501,4697.333333333333" size="100,100">&quot;You can&#39;t just leave your dog out there to get hurt!&quot; you protest. 
 
@@ -1020,9 +1029,9 @@ Jelena hears your fall, and [[rushes back to help you.]]
 &quot;I know a place we can set up camp for tonight,&quot; Jelena says. &quot;It&#39;s not too far from here. We should make it there before it gets too dark.&quot; 
 
 You follow Jelena [[further into the unknown.|the camp]]
-</tw-passagedata><tw-passagedata pid="75" name="death 2" tags="" position="202,5295" size="100,100">Using your fantomet-powered flashlight drew the //Dimman// too close to the two of you.  
+</tw-passagedata><tw-passagedata pid="75" name="death 2" tags="death" position="198.66666666666666,5298.333333333333" size="100,100">Using your fantomet-powered flashlight drew the //Dimman// too close to the two of you.  
 
-&lt;display &quot;death&quot;&gt;</tw-passagedata><tw-passagedata pid="76" name="rushes back to help you." tags="" position="1101,5400" size="100,100">&lt;&lt;if $karma &lt; -3&gt;&gt; 
+&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="rushes back to help you." tags="" position="1101,5400" size="100,100">&lt;&lt;if $karma &lt; -3&gt;&gt; 
 &quot;Idiot,&quot; she mutters under her breath. &quot;Of course a //fremmed// like you wouldn&#39;t know how to walk without injuring yourself.&quot; 
 
 Jelena looks at you, trying to assess the damage of your fall. &quot;Try not to get injured again in the future. Injuries out here could mean your death.&quot; 
@@ -1187,7 +1196,7 @@ You&#39;re so exhausted that you drift off to sleep.
 
 
 
-</tw-passagedata><tw-passagedata pid="87" name="death 3" tags="" position="200,6399.666666666667" size="100,100">Your relationship with Jelena was not solid enough to immediately listen to her advice.
+</tw-passagedata><tw-passagedata pid="87" name="death 3" tags="death" position="200,6399.666666666667" size="100,100">Your relationship with Jelena was not solid enough to immediately listen to her advice.
 
 &lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="The next morning." tags="" position="901.6666666666666,6702.333333333333" size="100,100">You wake up the next morning, and your entire body aches. 
 &lt;&lt;if $hasFallen&gt;&gt; 
@@ -1236,7 +1245,7 @@ Jelena slings her bag over her shoulder.
 [[Let&#39;s go.|The village]] 
 [[&#39;&quot;How long will it take to get there?&quot;&#39;]]</tw-passagedata><tw-passagedata pid="93" name="You fail" tags="" position="200.33333333333334,6900" size="100,100">You gave up on finding answers. You failed your mission; the Englene Institute pulled your funding and you were never given a research expedition again. No one else tried to study fantomet and Phantomfelt.
 
-[[Try again|landed]] 
+Use the sidebar to try again.
 [[You&#39;re done. See the impact of your choices.|the world continues]]
 
 </tw-passagedata><tw-passagedata pid="94" name="&#39;&quot;How long will it take to get there?&quot;&#39;" tags="" position="1102.3333333333333,7103.666666666667" size="100,100">&quot;We&#39;ll be able to reach the village by nightfall,&quot; Jelena answers. &quot;I think we should rest there overnight and get the samples in the morning before heading back.&quot;
@@ -1326,7 +1335,7 @@ Jelena takes it back and puts it in her bag. &quot;That&#39;s a shame. You could
 You&#39;re too tired to argue, and you eventually [[fall asleep.|finding fantomet]]</tw-passagedata><tw-passagedata pid="103" name="Your questions 2" tags="" position="902,1397" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $questions2 == 0&gt;&gt;
 &lt;&lt;actions
 [[&#39;&quot;What do they stock?&quot;&#39;|stock?][$questions2 += 1]]
-[[&#39;&quot;Where&#39;s my guide?&quot;&#39;|guide?][$questions2 += 1]]
+[[&#39;&quot;Where&#39;s my guide?&quot;&#39;|guide?][$questions2 += 1]]&gt;&gt;
 
 &lt;&lt;elseif $karma &lt; 0 &amp;&amp; $guide&gt;&gt;
 &lt;&lt;actions
@@ -1391,9 +1400,12 @@ The sheer force of her personality has you complying. In hindsight, trying to bu
 Still...//this// was your guide?
 
 [[&#39;&quot;And you&#39;re qualified?&quot;&#39;|guide-doubt2][$karma -= 1]]
-[[Put your best foot forward.|good team2][$karma += 1]]</tw-passagedata><tw-passagedata pid="108" name="death" tags="death" position="101.66666666666663,4301.666666666667" size="100,100"></tw-passagedata><tw-passagedata pid="109" name="the world continues" tags="" position="301.99999999999994,8101.666666666668" size="100,100">You live a long life, and die knowing your children&#39;s children won&#39;t be able to.
+[[Put your best foot forward.|good team2][$karma += 1]]</tw-passagedata><tw-passagedata pid="108" name="death" tags="death" position="101.66666666666663,4301.666666666667" size="100,100">@@.song;Beware the Dimman
+Wander into its veil
+Your last dawn
+So ends your tale...@@</tw-passagedata><tw-passagedata pid="109" name="the world continues" tags="end" position="301.99999999999994,8101.666666666668" size="100,100">You live a long life, and die knowing your children&#39;s children won&#39;t be able to.
 
-Fantomet&#39;s use became widespread. It was an energy source, but no one seemed to care that the energy they received was burning the candle of humanity. The mist had encroached to include almost half the world, and you saw the projections of scientists, your successors. Humanity approached a tipping point, and you die with no hope of them turning back in time.</tw-passagedata><tw-passagedata pid="110" name="ending" tags="" position="900.3333333333334,8202" size="100,100">You dedicate your life to fighting for the use of clean energy sources. Fantomet is not one of them, but it is so profitable and easy. The fight is that much harder. 
+Fantomet&#39;s use became widespread. It was an energy source, but no one seemed to care that the energy they received was burning the candle of humanity. The mist had encroached to include almost half the world, and you saw the projections of scientists, your successors. Humanity approached a tipping point, and you die with no hope of them turning back in time.</tw-passagedata><tw-passagedata pid="110" name="ending" tags="end" position="900.3333333333334,8202" size="100,100">You dedicate your life to fighting for the use of clean energy sources. Fantomet is not one of them, but it is so profitable and easy. The fight is that much harder. 
 
 &lt;&lt;if $karma &gt; 8&gt;&gt;
 You form community research groups with locals, collaborate with and learn from them, work to try and convince the continents that this is real and this is not sustainable.
@@ -1403,7 +1415,7 @@ You report your findings to the Englene Institute, but you do not stop there. Yo
 
 Jelena&#39;s brother grows up to be a researcher like you. You help spread awareness and lobby politicians—but it still seems like it&#39;s not enough.
 
-When you die, you leave with the hope that your children&#39;s children will have grandchildren that can still walk the world.</tw-passagedata><tw-passagedata pid="111" name="report" tags="" position="602,8202" size="100,100">The Englene Institute received your findings, but could not turn the world from the path it was on. 
+When you die, you leave with the hope that your children&#39;s children will have grandchildren that can still walk the world.</tw-passagedata><tw-passagedata pid="111" name="report" tags="end" position="602,8202" size="100,100">The Englene Institute received your findings, but could not turn the world from the path it was on. 
 &lt;&lt;display &quot;the world continues&quot;&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
