@@ -106,16 +106,24 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 @import url('https://fonts.googleapis.com/css?family=Trade+Winds&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Sirin+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Redressed&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Calligraffitti&display=swap');
+img {
+ max-height: 100%;
+ max-width: 100%;
+}
+#ui-bar {
+  background-image: linear-gradient(to right, #00274d, #003366);
+  font-family: 'Mirza', sans-serif;
+}
 body {
 background-image: linear-gradient(to right, #004080, #339999);
 color: lightgrey;
 font-family: 'Mirza', sans-serif;
 }
-#ui-bar-history, #menu-item-saves {
+#ui-bar-history, #menu-item-saves, .hidden {
 	display: none;
-}
-#ui-bar {
-    background-image: linear-gradient(to right, #00274d, #003366);
 }
 #menu ul {
  border: 1px solid #454545; 
@@ -137,11 +145,11 @@ font-family: 'Mirza', sans-serif;
   color: grey;
 }
 .song {
- font-style: italic; 
- color: white;
+ color: #999999;
+font-family: 'Akronim', cursive;
 }
 .fantasy {
-  font-family: 'Seaweed Script', cursive;
+  font-family: 'Redressed', cursive;
 }
 body.death {
   background: black;
@@ -214,7 +222,21 @@ body.letter .passage {
 }
 .signed {
  font-family: italic;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Begin Inventory Macros
+}
+#list {
+  background: #e4d2ba;
+  color: #15120e;
+  font-family: 'Caveat', sans-serif;
+  border: 10px solid #937d62;
+  padding: 20px;
+}
+#list a{
+  font-family: inherit;
+  font-weight: bold;
+  text-decoration: underline;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+// Begin Inventory Macros
 // Original macros by F2Andy: http://strugglingwithtwine.blogspot.ca/2014/03/handling-inventory.html
 //
 // Instructions:
@@ -284,7 +306,7 @@ macros.inv = {
     if (state.active.variables.inventory.length == 0) {
       new Wikifier(place, 'nothing');
     } else {
-      new Wikifier(place, state.active.variables.inventory.join(','));
+      new Wikifier(place, state.active.variables.inventory.join(', '));
     }
   }
 };
@@ -313,10 +335,15 @@ macros.emptyInv = {
   }
 };
 // End Inventory Macros
-</script><tw-passagedata pid="1" name="Your journey begins" tags="start" position="901,101" size="100,100">In a land far far away...
-
-You are a researcher seeking answers.
+</script><tw-passagedata pid="1" name="Your journey begins" tags="start fantasy" position="901,101" size="100,100">In a land far far away...
+&lt;html&gt;
+&lt;video controls&gt;
+	&lt;source src=&quot;prologue.mp4&quot; type=&quot;video/mp4&quot;&gt;
+&lt;/video&gt;
+&lt;/html&gt;
+&lt;&lt;timed 30s t8n&gt;&gt;You are a researcher seeking answers.
 [[You have mail-&gt;login]]
+&lt;&lt;/timed&gt;&gt;
 </tw-passagedata><tw-passagedata pid="2" name="letter" tags="letter" position="1100,300" size="100,100">Professor $name, 
 
 Your theories on fantomet are bold. That is promising as the current energy crisis requires bold strokes. Some countries have already adopted fantomet use; your research could convince the world. 
@@ -330,57 +357,19 @@ We look forward to your findings,
 
 [[Continue-&gt;landed]]</tw-passagedata><tw-passagedata pid="3" name="StoryCaption" tags="" position="600,102" size="100,100">[[Inventory]]
 [[Map]]
-[[Start again at your arrival-&gt;landed]]</tw-passagedata><tw-passagedata pid="4" name="landed" tags="" position="900,399" size="100,100">&lt;&lt;set $karma = 0&gt;&gt;Your first flight out arrives on the edges of the farthest nation you can name. Your next flight, you can&#39;t conclusively tell if it’s powered by fantomet or just propellers and determination. 
+[[Terms, Places, and People]]
 
-Your second flight lands besides a bay, and mist clings to the landscape surrounding you. You&#39;ve arrived on the island of Grenseøya. You can’t help but think that the island looks-
+[[Start again at your arrival-&gt;landed]]</tw-passagedata><tw-passagedata pid="4" name="landed" tags="" position="900,399" size="100,100">&lt;&lt;set $karma = 0&gt;&gt;&lt;&lt;emptyInv&gt;&gt;&lt;&lt;addToInv &quot;world map&quot;&gt;&gt;&lt;&lt;addToInv flashlight&gt;&gt;&lt;&lt;addToInv &quot;recording device&quot;&gt;&gt;Your first flight out arrives on the edges of the farthest nation you can name. Your next flight, you can&#39;t conclusively tell if it’s powered by fantomet or just propellers and determination. 
+
+You land besides a bay, and mist clings to the landscape surrounding you. So this is the island of Grenseøya. 
+
+[img[bay|https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/landed.jpg]]
+
+You can’t help but think that Grenseøya looks...
 
 [[Eerily beautiful.-&gt;volunteer][$karma += 1]]
 [[Very unsettling.-&gt;volunteer][$karma -= 1]]
-[[Untouched.-&gt;volunteer]]</tw-passagedata><tw-passagedata pid="5" name="Store" tags="" position="399.3333333333333,2301.333333333333" size="100,100">Empathy: \
-&lt;&lt;link &quot;[+]&quot;&gt;&gt;
-    &lt;&lt;if $totalPoints gt 0&gt;&gt;
-      &lt;&lt;set $empathy++&gt;&gt;
-      &lt;&lt;set $totalPoints--&gt;&gt;
-      &lt;&lt;replace &quot;#empathyStat&quot;&gt;&gt;&lt;&lt;print $empathy&gt;&gt;&lt;&lt;/replace&gt;&gt;
-      &lt;&lt;replace &quot;#pointsStat&quot;&gt;&gt;&lt;&lt;print $totalPoints&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;link &quot;[-]&quot;&gt;&gt;
-    &lt;&lt;if $empathy gt 0&gt;&gt;
-      &lt;&lt;set $empathy--&gt;&gt;
-      &lt;&lt;set $totalPoints++&gt;&gt;
-      &lt;&lt;replace &quot;#empathyStat&quot;&gt;&gt;&lt;&lt;print $empathy&gt;&gt;&lt;&lt;/replace&gt;&gt;
-      &lt;&lt;replace &quot;#pointsStat&quot;&gt;&gt;&lt;&lt;print $totalPoints&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-Intelligence: \
-&lt;&lt;link &quot;[+]&quot;&gt;&gt;
-    &lt;&lt;if $totalPoints gt 0&gt;&gt;
-      &lt;&lt;set $intelligence++&gt;&gt;
-      &lt;&lt;set $totalPoints--&gt;&gt;
-      &lt;&lt;replace &quot;#intelligenceStat&quot;&gt;&gt;&lt;&lt;print $intelligence&gt;&gt;&lt;&lt;/replace&gt;&gt;
-      &lt;&lt;replace &quot;#pointsStat&quot;&gt;&gt;&lt;&lt;print $totalPoints&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;link &quot;[-]&quot;&gt;&gt;
-    &lt;&lt;if $intelligence gt 0&gt;&gt;
-      &lt;&lt;set $intelligence--&gt;&gt;
-      &lt;&lt;set $totalPoints++&gt;&gt;
-      &lt;&lt;replace &quot;#intelligenceStat&quot;&gt;&gt;&lt;&lt;print $intelligence&gt;&gt;&lt;&lt;/replace&gt;&gt;
-      &lt;&lt;replace &quot;#pointsStat&quot;&gt;&gt;&lt;&lt;print $totalPoints&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;&lt;link &quot;[Reset Points]&quot;&gt;&gt;
-    &lt;&lt;set $empathy to 10&gt;&gt;
-    &lt;&lt;set $intelligence to 10&gt;&gt;
-    &lt;&lt;set $totalPoints to 5&gt;&gt;
-    &lt;&lt;replace &quot;#empathyStat&quot;&gt;&gt;&lt;&lt;print $empathy&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;replace &quot;#intelligenceStat&quot;&gt;&gt;&lt;&lt;print $intelligence&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;replace &quot;#pointsStat&quot;&gt;&gt;&lt;&lt;print $totalPoints&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-Empathy: &lt;span id=&quot;empathyStat&quot;&gt;10&lt;/span&gt;
-Intelligence: &lt;span id=&quot;intelligenceStat&quot;&gt;10&lt;/span&gt;
-Remaining Points: &lt;span id=&quot;pointsStat&quot;&gt;5&lt;/span&gt;</tw-passagedata><tw-passagedata pid="6" name="volunteer" tags="" position="900,549" size="100,100">You disembark the cramped aircraft with your bags tucked under your arms, and find yourself standing on a dirt landing-strip. You look around &lt;&lt;switch $karma&gt;&gt;
+[[Untouched.-&gt;volunteer]]</tw-passagedata><tw-passagedata pid="5" name="volunteer" tags="" position="900,549" size="100,100">You disembark the cramped aircraft with your bags tucked under your arms, and find yourself standing on a dirt landing-strip. You look around &lt;&lt;switch $karma&gt;&gt;
 &lt;&lt;case -1&gt;&gt;at your gloomy surroundings. It feels almost like a graveyard. You&#39;re hyperaware of every whisper of wind and immediately spot the only person around for miles as they approach, the dirt ground crunching beneath their feet. Even with them there, though, you can’t help but feel unnerved as the plane began to take off down the runway. This island may be part of every major world map, but it doesn&#39;t feel ilke your world.
 
 “Welcome to Grenseøya,” the person says. You&#39;re guessing this is the community volunteer that the Englene Institute hired. “Do you need any help with those bags?” they ask. 
@@ -401,7 +390,7 @@ You turn around and see an older man. &lt;&lt;/switch&gt;&gt;His hair is slightl
 
 [[You doubt he could help.-&gt;No, I don&#39;t need your help.][$karma -= 1]] 
 [[&#39;&quot;Yes, thank you.&quot;&#39;|thank you][$luggage to true]] 
-[[&#39;&quot;No, thank you.&quot;&#39;|thank you]]</tw-passagedata><tw-passagedata pid="7" name="thank you" tags="" position="702,698" size="100,100">&lt;&lt;if $luggage&gt;&gt;“Yes, thank you,” you say. “Be careful though, they’re a bit heavy. There’s a lot of equipment in there.” 
+[[&#39;&quot;No, thank you.&quot;&#39;|thank you]]</tw-passagedata><tw-passagedata pid="6" name="thank you" tags="" position="702,698" size="100,100">&lt;&lt;if $luggage&gt;&gt;“Yes, thank you,” you say. “Be careful though, they’re a bit heavy. There’s a lot of equipment in there.” 
 
 “My name is Oskar,” he says while helping you gather your luggage.&lt;&lt;else&gt;&gt;&quot;No, thank you,&quot; you say as you shift your bag&#39;s shoulder strap higher. &quot;There&#39;s a lot of heavy equipment in here, and some of it&#39;s very delicate. It would probably be better if I carry them.&quot; 
 
@@ -412,7 +401,7 @@ You turn around and see an older man. &lt;&lt;/switch&gt;&gt;His hair is slightl
 “It&#39;s nice to meet you, Professor $name. I’ll be taking you to the town of Ved Fjellet, just a little way inland towards the mountains. It&#39;s the largest settlement in Sørfelt.” Sørfelt, you remember, is the southern region of Grenseøya and its most populous and developed. 
 
 [[Your mind wanders as the landscape around you changes.-&gt;Questions]]
-</tw-passagedata><tw-passagedata pid="8" name="No, I don&#39;t need your help." tags="" position="1100,702" size="100,100">&lt;&lt;set $heardFremmed = true&gt;&gt;“I don&#39;t need your help,” you sling you bags onto your shoulders. “There’s a lot of delicate equipment in here; I don’t want any of it getting broken.” 
+</tw-passagedata><tw-passagedata pid="7" name="No, I don&#39;t need your help." tags="" position="1100,702" size="100,100">&lt;&lt;set $heardFremmed = true&gt;&gt;“I don&#39;t need your help,” you sling you bags onto your shoulders. “There’s a lot of delicate equipment in here; I don’t want any of it getting broken.” 
 	
 The man nods. “My name is Oskar. I&#39;m assuming you&#39;re, Professor $name?&quot;
 
@@ -421,22 +410,22 @@ You nod.
 &quot;I’ll be taking you to the town of Ved Fjellet, just a little way inland towards the mountains. Got any questions, //fremmed?//&quot; 
 
 [[You consider that.-&gt;Questions]]
-</tw-passagedata><tw-passagedata pid="9" name="Ved Fjellet?" tags="" position="653,1046" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“What’s Ved Fjellet like?” You ask. 
+</tw-passagedata><tw-passagedata pid="8" name="Ved Fjellet?" tags="" position="653,1046" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“What’s Ved Fjellet like?” You ask. 
 
 “It’s just like a normal town out here, I guess.” Oskar says. “We’ve got some shops and a school. We got a new hospital, too. It ain’t much, but it helps everyone in Ved Fjellet and the surrounding communities. Our only issue is the town’s getting too cramped these days. We got the businesses but not enough houses. The //Dimman// is changing everything.”
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Supplies?" tags="" position="802,1044" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“Where can I get other research supplies in Ved Fjellet?” You ask. 
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Supplies?" tags="" position="802,1044" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“Where can I get other research supplies in Ved Fjellet?” You ask. 
 
 “We got plenty of places for shopping there. I can’t list ‘em all off the top of my head, though. There’s some food places, and some specialty shops that make gear and clothes for when you venture out into the wilderness. We’ll be able to get you ready for the weather, but no amount of gear can protect you from the //Dimman//.
 
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Fantomet?" tags="" position="1004,1040" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“I’m sure the Englene Institute told you that I’m here to study fantomet.&quot; Oskar nods. &quot;I&#39;ve learned some things about it from other projects, but what are your thoughts on it?” 
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Fantomet?" tags="" position="1004,1040" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“I’m sure the Englene Institute told you that I’m here to study fantomet.&quot; Oskar nods. &quot;I&#39;ve learned some things about it from other projects, but what are your thoughts on it?” 
 
 “On fantomet?&quot; You nod. &quot;Yeah, I guess we&#39;d look at it different than most folk, living so close to the //Dimman// and all.&quot;
 
-You blink. &quot;Why so?&quot;
+You blink. &quot;How so?&quot;
 
 &quot;Well, fantomet may be a recent thing for the continents, but here on Grenseøya, it&#39;s part of our mythology.&quot;
 
-&quot;What do the myths say?&quot;
+&quot;What do your myths say?&quot;
 
 &quot;Let&#39;s see if I remember...&quot; Oskar coughs. 
 
@@ -448,17 +437,22 @@ and the mountains and called fantomet. Some say fantomet anchored one of the spi
 
 &quot;But those are just myths. Probably. Who knows?” 
 
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="fremmed?" tags="" position="1153,1040" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“Fremmed? What does that mean?” You ask Oskar. 
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;
+
+&lt;&lt;set $terms.push(&quot;Førstesegs&quot;)&gt;&gt;
+&lt;&lt;set $places.push(&quot;Ondkraft&quot;)&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="fremmed?" tags="" position="1153,1040" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“Fremmed? What does that mean?” You ask Oskar. 
 
 “It means ‘stranger’ or ‘traveler.’ You should get used to people around here calling you it; it&#39;s not everyday we get fancy vistors from the main continents.” 
 
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Ved Fjellet" tags="" position="902,1200" size="100,100">You and Oskar finally arrive in Ved Fjellet. He leads you to a lodge with a simple, hand-painted sign in the front window saying  “Anja’s.”
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;
+
+&lt;&lt;set $terms.push(&quot;fremmed&quot;)&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Ved Fjellet" tags="" position="902,1200" size="100,100">You and Oskar finally arrive in Ved Fjellet. He leads you to a lodge with a simple, hand-painted sign in the front window saying  “Anja’s.”
 
 “This is it,” He says. “This is where I leave you in the capable hands of your guide.” 
 
 [[&#39;&quot;What is this place?&quot;&#39;|&quot;What is this place?&quot;]]
 [[&#39;&quot;And this is safe?&quot;&#39;|&quot;And this is safe?&quot;][$karma -= 1]] 
-[[You have no further questions and thank Oskar.-&gt;Thanks, Oskar.]]</tw-passagedata><tw-passagedata pid="14" name="Dimman?" tags="" position="1302,1038" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“What is the //Dimman//?” You ask. 
+[[You have no further questions and thank Oskar.-&gt;Thanks, Oskar.]]</tw-passagedata><tw-passagedata pid="13" name="Dimman?" tags="" position="1302,1038" size="100,100">&lt;&lt;set $expo += 1&gt;&gt;“What is the //Dimman//?” You ask. 
 
 “You came all this way and never heard about the //Dimman//?” Oskar laughs. “Though I suppose you folk only know it as &#39;the mist that borders the world.&#39; But take it from someone who actually lives near the thing: the //Dimman// is a deathwish for people like you and me. Makes you wonder why our ancestors settled here, but hey, we&#39;re still alive.&quot; 
 
@@ -470,31 +464,36 @@ You have no idea what animal he&#39;s talking about.
 
 &quot;Guess you&#39;ve never seen one of them, huh. If you&#39;re lucky, you won&#39;t.&quot; Well that&#39;s ominous. &quot;Anyway,&quot; he shifts to almost singing, &quot;//Beware the //Dimman//. Wander into its veil, your last dawn, so ends your tale...//” He shrugs. &quot;Or so the song goes.&quot;
 
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="&quot;What is this place?&quot;" tags="" position="699.6666666666666,1300.6666666666667" size="100,100">“What is this place?” You try to look through the windows of the home, but can’t make anything out. 
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;
+
+&lt;&lt;set $terms.push(&quot;Dimman&quot;)&gt;&gt;
+&lt;&lt;set $terms.push(&quot;Bjørnulves&quot;)&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="&quot;What is this place?&quot;" tags="" position="699,1300" size="100,100">“What is this place?” You try to look through the windows of the home, but can’t make anything out. 
 
 “It’s a store,” Oskar says. “I’m sure it’s a little less than what you’re used to, but you can buy all the supplies you need for your trip here.” 
 &lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="16" name="&quot;And this is safe?&quot;" tags="" position="1100.3333333333333,1299.6666666666667" size="100,100">You try to look through the windows of the...modest building from a minimum safe distance but can’t make anything out. 
+&lt;&lt;set $people.push(&quot;Anja&quot;)&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="&quot;And this is safe?&quot;" tags="" position="1100,1299" size="100,100">You try to look through the windows of the...modest building from a minimum safe distance but can’t make anything out. 
 
 “It’s a store,” Oskar says. “It may not look or be like what you’re used to, but you can buy all the supplies you need for your trip here.” 
-&lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="stock?" tags="actions-cont" position="901,1595" size="100,100">“There’s plenty of things,” Oskar says. 
+&lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;
+&lt;&lt;set $people.push(&quot;Anja&quot;)&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="stock?" tags="actions-cont" position="901,1595" size="100,100">“There’s plenty of things,” Oskar says. 
 
 You somehow don&#39;t expect they stock sports drinks, magazines, and mints like you&#39;re used to. “There’s food, clothes, gear, trail maps, sometimes there’s a couple of books.”
 
 //Sometimes// there are books.
-&lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="guide?" tags="" position="703,1599" size="100,100">&lt;&lt;set $guide to true&gt;&gt;“Where’s my guide?” You ask. 
+&lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="guide?" tags="" position="703,1599" size="100,100">&lt;&lt;set $guide to true&gt;&gt;“Where’s my guide?” You ask. 
 &lt;&lt;if $karma &lt; 0&gt;&gt;
 “They should meet you here shortly,” Oskar replies. “Your flight made good time, and we’re here in town earlier than anticipated. They will meet you here, though.”
 &lt;&lt;else&gt;&gt;
-“Your guide’s name is Jelena. She should meet you here shortly,” Oskar replies. “Your flight made good time, and we’re here in town earlier than anticipated. She will meet you here, though. She isn’t always punctual, but she gave me her word and she’s very reliable.” &lt;&lt;/if&gt;&gt;
+“Your guide’s name is Jelena. She should meet you here shortly,” Oskar replies. “Your flight made good time, and we’re here in town earlier than anticipated. She will meet you here, though. She isn’t always punctual, but she gave me her word and she’s very reliable.” 
+&lt;&lt;set $people.push(&quot;Jelena&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="19" name="not prepared" tags="" position="601,1727" size="100,100">&lt;&lt;set $guide to false&gt;&gt;
+</tw-passagedata><tw-passagedata pid="18" name="not prepared" tags="" position="601,1727" size="100,100">&lt;&lt;set $guide to false&gt;&gt;
 “They should have planned ahead,” you say. “This project&#39;s findings could potentially impact the world, and they’re late? If I’m here they should be here, too.” 
 
 Oskar nods hesitantly in response, “They’ll be here soon. You can get your supplies while you’re waiting at least.”
 
 &lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="20" name="Thanks, Oskar." tags="" position="999,1897" size="100,100">“Thank you for your help, Oskar.&quot; 
+</tw-passagedata><tw-passagedata pid="19" name="Thanks, Oskar." tags="" position="999,1897" size="100,100">“Thank you for your help, Oskar.&quot; 
 
 &lt;&lt;if $karma &gt; 0&gt;&gt;
 The man smiles and wishes you luck on your journey. &quot;I hope you remember me when you&#39;re all big and famous,&quot; he jokes.
@@ -502,11 +501,16 @@ The man smiles and wishes you luck on your journey. &quot;I hope you remember me
 Oskar departs, leaving you at &quot;Anja&#39;s.&quot; Your guide isn&#39;t here yet. What do you decide to do in the meantime?
 
 [[Start shopping without them.]] 
-[[Wait for your guide to help you choose supplies.]]</tw-passagedata><tw-passagedata pid="21" name="Inventory" tags="" position="701,300" size="100,100">&lt;&lt;if $inventory.length == 0&gt;&gt;You are not carrying anything.&lt;&lt;else&gt;&gt;You are carrying:
-&lt;&lt;invWithLinks&gt;&gt; &lt;&lt;endif&gt;&gt;
-Money: $money tomet
-&lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="StoryInit" tags="" position="400,102" size="100,100">&lt;&lt;initInv&gt;&gt;
-&lt;&lt;addToInv flashlight&gt;&gt;
+[[Wait for your guide to help you choose supplies.]]</tw-passagedata><tw-passagedata pid="20" name="Inventory" tags="" position="701,300" size="100,100">&lt;&lt;if $inventory.length == 0&gt;&gt;You are not carrying anything.&lt;&lt;else&gt;&gt;You are carrying:
+&lt;&lt;inv&gt;&gt; &lt;&lt;endif&gt;&gt;
+
+Money: &lt;&lt;if $hasMoney&gt;&gt;$money tomet
+&lt;&lt;else&gt;&gt;Jelena has it&lt;&lt;/if&gt;&gt;
+&lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="StoryInit" tags="" position="400,102" size="100,100">&lt;&lt;initInv&gt;&gt;
+&lt;&lt;set $hasRegionMap to false&gt;&gt;
+&lt;&lt;set $people = []&gt;&gt;
+&lt;&lt;set $places = []&gt;&gt;
+&lt;&lt;set $terms = []&gt;&gt;
 
 &lt;&lt;set $karma = 0&gt;&gt;
 &lt;&lt;set $luggage = false&gt;&gt;
@@ -517,17 +521,56 @@ Money: $money tomet
 
 &lt;&lt;set $questions2 = 0&gt;&gt;
 &lt;&lt;set $guide = false&gt;&gt;
-&lt;&lt;set $money = 500&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Start shopping without them." tags="" position="700.3333333333334,2100.6666666666665" size="100,100">Upon entering the store, you notice it&#39;s small but cozy. Some clothes are hanging on hooks on the walls, and other miscellaneaous objects are proudly displayed on well-worn shelves. There&#39;s an older woman sitting behind a counter at the front of the room. 
+
+&lt;&lt;set $hasMoney = true&gt;&gt;
+&lt;&lt;set $money = 500&gt;&gt;
+&lt;&lt;set $furCoat = 0&gt;&gt;
+&lt;&lt;set $pants = 0&gt;&gt;
+&lt;&lt;set $shirts = 0&gt;&gt;
+&lt;&lt;set $shorts = 0&gt;&gt;
+&lt;&lt;set $gloves = 0&gt;&gt;
+&lt;&lt;set $swimsuit = 0&gt;&gt;
+&lt;&lt;set $socks = 0&gt;&gt;
+&lt;&lt;set $goggles = 0&gt;&gt;
+&lt;&lt;set $boots = 0&gt;&gt;
+&lt;&lt;set $snowshoes = 0&gt;&gt;
+
+&lt;&lt;set $lostcity = 0&gt;&gt;
+&lt;&lt;set $intro = 0&gt;&gt;
+&lt;&lt;set $childbook = 0&gt;&gt;
+&lt;&lt;set $cannedmeat = 0&gt;&gt;
+&lt;&lt;set $cannedfruit = 0&gt;&gt;
+&lt;&lt;set $cannedveg = 0&gt;&gt;
+&lt;&lt;set $driedmeat = 0&gt;&gt;
+&lt;&lt;set $driedfruit = 0&gt;&gt;
+&lt;&lt;set $driedveg = 0&gt;&gt;
+&lt;&lt;set $freshmeat = 0&gt;&gt;
+&lt;&lt;set $freshfruit = 0&gt;&gt;
+&lt;&lt;set $freshveg = 0&gt;&gt;
+&lt;&lt;set $eggs = 0&gt;&gt;
+
+&lt;&lt;set $compass = 0&gt;&gt;
+&lt;&lt;set $map = 0&gt;&gt;
+&lt;&lt;set $tent = 0&gt;&gt;
+&lt;&lt;set $lantern = 0&gt;&gt;
+&lt;&lt;set $purifier = 0&gt;&gt;
+&lt;&lt;set $waterskein = 0&gt;&gt;
+&lt;&lt;set $sled = 0&gt;&gt;
+&lt;&lt;set $fantomet = 0&gt;&gt;
+&lt;&lt;set $fuel = 0&gt;&gt;
+&lt;&lt;set $canopener = 0&gt;&gt;
+&lt;&lt;set $knife = 0&gt;&gt;
+&lt;&lt;set $fishing = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Start shopping without them." tags="" position="700,2100" size="100,100">Upon entering the store, you notice it&#39;s small but cozy. Some clothes are hanging on hooks on the walls, and other miscellaneaous objects are proudly displayed on well-worn shelves. There&#39;s an older woman sitting behind a counter at the front of the room. 
 
 &quot;Hello,&quot; she smiles at you. &quot;Can I help you with anything?&quot; 
 
-[[Yes, thank you.|She runs down a list of items.]] 
-[[I&#39;m just browsing.|She runs down a list of items.]]</tw-passagedata><tw-passagedata pid="24" name="Wait for your guide to help you choose supplies." tags="" position="1002,2100" size="100,100">You decide to wait for your guide. Maybe they can help you choose supplies. It&#39;s cold, though. 
+[[Yes, thank you.|list]] 
+[[I&#39;m just browsing.|list]]</tw-passagedata><tw-passagedata pid="23" name="Wait for your guide to help you choose supplies." tags="" position="1002,2100" size="100,100">You decide to wait for your guide. Maybe they can help you choose supplies. It&#39;s cold, though. 
 
 You...
 
 [[Go wait inside the store.]] 
-[[Wait outside of the store.][$karma -= 1]] </tw-passagedata><tw-passagedata pid="25" name="Go wait inside the store." tags="" position="1000,2297" size="100,100">You see someone enter &quot;Anja&#39;s.&quot; They&#39;re wearing a bulky fur coat and a large matching fur hat. The lower half of their face is covered by a thick mask. 
+[[Wait outside of the store.][$karma -= 1]] </tw-passagedata><tw-passagedata pid="24" name="Go wait inside the store." tags="" position="1000,2297" size="100,100">You see someone enter &quot;Anja&#39;s.&quot; They&#39;re wearing a bulky fur coat and a large matching fur hat. The lower half of their face is covered by a thick mask. 
 
 The stranger approaches you, unzipping their jacket and tugging their mask down. They hang their coat up, and suddenly, you&#39;re not facing a hulking menace but just a woman. She&#39;s of average height and build as far as you can tell.
 
@@ -538,95 +581,577 @@ You nod.
 &quot;I&#39;ll be your guide then, Professor $name.&quot; 
 
 [[&#39;&quot;And you&#39;re qualified?&quot;&#39;|guide-doubt][$karma -= 1]]
-[[Put your best foot forward.|good team][$karma += 1]]</tw-passagedata><tw-passagedata pid="26" name="Wait outside of the store." tags="" position="1202,2099" size="100,100">You lean against the wall of the lodge and stare out at the ‘town’ of Ved Fjellet. It’s not a town in the traditional sense; it looks more like a village. The houses are small, and many aren’t even painted. There are no driveways, streets, and the only sign you’ve noticed since getting here is the small, barely-noticeable sign in the window of “Anja’s.” And that&#39;s obviously hand-painted.
+[[Put your best foot forward.|good team][$karma += 1]]
+&lt;&lt;if $people.indexOf(&quot;Jelena&quot;) == -1&gt;&gt;&lt;&lt;set $people.push(&quot;Jelena&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Wait outside of the store." tags="" position="1202,2099" size="100,100">You lean against the wall of the lodge and stare out at the ‘town’ of Ved Fjellet. It’s not a town in the traditional sense; it looks more like a village. The houses are small, and many aren’t even painted. There are no driveways, streets, and the only sign you’ve noticed since getting here is the small, barely-noticeable sign in the window of “Anja’s.” And that&#39;s obviously hand-painted.
 
 [[You&#39;re not waiting long before...|You see someone walking towards &quot;Anja&#39;s&quot;]]
 
-</tw-passagedata><tw-passagedata pid="27" name="She runs down a list of items" tags="" position="599.3333333333334,2302.3333333333335" size="100,100">(WIP)
-The list:
-&lt;&lt;set $money = 500&gt;&gt;
+</tw-passagedata><tw-passagedata pid="26" name="list" tags="store" position="599,2302" size="100,100">You may have underestimated how many items even a small store like this would have.
 
-Extra clothes: 
-Fur Coat (50 tomet) &lt;&lt;checkbox &quot;$hasFurCoat&quot; false true&gt;&gt;
-&lt;&lt;set $money -= 50&gt;&gt;
-&lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-Pants (25 tomet) &lt;&lt;checkbox &quot;$hasPants&quot; false true&gt;&gt;
-&lt;&lt;if $hasPants&gt;&gt;&lt;&lt;set $inventory.push(&quot;Pants&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Shirts (15 tomet) &lt;&lt;checkbox &quot;$hasShirts&quot; false true&gt;&gt;
-&lt;&lt;if $hasShirts&gt;&gt;&lt;&lt;set $inventory.push(&quot;Shirts&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Shorts (15 tomet) &lt;&lt;checkbox &quot;$hasShorts&quot; false true&gt;&gt;
-&lt;&lt;if $hasShorts&gt;&gt;&lt;&lt;set $inventory.push(&quot;Shorts&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Gloves (5 tomet) &lt;&lt;checkbox &quot;$hasGloves&quot; false true&gt;&gt;
-&lt;&lt;if $hasGloves&gt;&gt;&lt;&lt;set $inventory.push(&quot;Gloves&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Swimsuit (20 tomet) &lt;&lt;checkbox &quot;$hasSwimsuit&quot; false true&gt;&gt;
-&lt;&lt;if $hasSwimsuit&gt;&gt;&lt;&lt;set $inventory.push(&quot;Swimsuit&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Socks (5 tomet) &lt;&lt;checkbox &quot;$hasSocks&quot; false true&gt;&gt;
-&lt;&lt;if $hasSocks&gt;&gt;&lt;&lt;set $inventory.push(&quot;Socks&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Swimming Goggles (15 tomet) &lt;&lt;checkbox &quot;$hasSwimmingGoggles&quot; false true&gt;&gt;
-&lt;&lt;if $hasSwimmingGoggles&gt;&gt;&lt;&lt;set $inventory.push(&quot;Swimming Goggles&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Boots (30 tomet) &lt;&lt;checkbox &quot;$hasBoots&quot; false true&gt;&gt;
-&lt;&lt;if $hasBoots&gt;&gt;&lt;&lt;set $inventory.push(&quot;Boots&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Snow Shoes (30 tomet) &lt;&lt;checkbox &quot;$hasSnowShoes&quot; false true&gt;&gt;
-&lt;&lt;if $hasSnowShoes&gt;&gt;&lt;&lt;set $inventory.push(&quot;Snow Shoes&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+Money: &lt;span id=&quot;money&quot;&gt;$money&lt;/span&gt; tomet
 
-Books:
-The Lost City of Ondkraft (5 tomet) &lt;&lt;checkbox &quot;$hasTheLostCityOfOndkraft&quot; false true&gt;&gt;
-&lt;&lt;if $hasTheLostCityOfOndkraft&gt;&gt;&lt;&lt;set $inventory.push(&quot;The Lost City of Ondkraft&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-A-Z Dictionary: An introduction to Phantomfelt’s Regional Dialects (5 tomet) &lt;&lt;checkbox &quot;$hasAnIntro&quot; false true&gt;&gt;
-&lt;&lt;if $hasAnIntro&gt;&gt;&lt;&lt;set $inventory.push(&quot;A-Z Dictionary: An introduction to Phantomfelt’s Regional Dialects&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Siouxie and the Fish (5 tomet) &lt;&lt;checkbox &quot;$hasChildBook&quot; false true&gt;&gt;
-&lt;&lt;if $hasChildBook&gt;&gt;&lt;&lt;set $inventory.push(&quot;Siouxie and the Fish&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-Food:
-Canned meats (5 tomet) &lt;&lt;checkbox &quot;$hasCannedMeat&quot; false true&gt;&gt;
-&lt;&lt;if $hasCannedMeat&gt;&gt;&lt;&lt;set $inventory.push(&quot;Canned foods (Assorted meats)&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Canned fruit (5 tomet) &lt;&lt;checkbox &quot;$hasCannedFruit&quot; false true&gt;&gt;
-&lt;&lt;if $hasCannedFruit&gt;&gt;&lt;&lt;set $inventory.push(&quot;Canned fruit&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Canned vegetables (5 tomet) &lt;&lt;checkbox &quot;$hasCannedVegetables&quot; false true&gt;&gt;
-&lt;&lt;if $hasCannedVegetables&gt;&gt;&lt;&lt;set $inventory.push(&quot;Canned vegetables&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Dried meat (5 tomet) &lt;&lt;checkbox &quot;$hasDriedMeat&quot; false true&gt;&gt;
-&lt;&lt;if $hasDriedMeat&gt;&gt;&lt;&lt;set $inventory.push(&quot;Dried Meat&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Dried fruit (7 tomet) &lt;&lt;checkbox &quot;$hasDriedFruit&quot; false true&gt;&gt;
-&lt;&lt;if $hasDriedFruit&gt;&gt;&lt;&lt;set $inventory.push(&quot;Dried Fruit&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Dried vegetables (7 tomet) &lt;&lt;checkbox &quot;$hasDriedVegetables&quot; false true&gt;&gt; 
-&lt;&lt;if $hasDriedVegetables&gt;&gt;&lt;&lt;set $inventory.push(&quot;Dried Vegetables&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Water skein (15 tomet) &lt;&lt;checkbox &quot;$hasWaterSkeins&quot; false true&gt;&gt;
-&lt;&lt;if $hasWaterSkein&gt;&gt;&lt;&lt;set $inventory.push(&quot;Water Skein&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Fresh fruit (7 tomet) &lt;&lt;checkbox &quot;$hasFreshFruit&quot; false true&gt;&gt;
-&lt;&lt;if $hasFreshFruit&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fresh fruit&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Fresh vegetables (7 tomet) &lt;&lt;checkbox &quot;$hasFreshVeg&quot; false true&gt;&gt;
-&lt;&lt;if $hasFreshVeg&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fresh vegetables&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Fresh meat (5 tomet) &lt;&lt;checkbox &quot;$hasFreshMeat&quot; false true&gt;&gt;
-&lt;&lt;if $hasFreshMeat&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fresh meat&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Eggs (3 tomet) &lt;&lt;checkbox &quot;$hasEggs&quot; false true&gt;&gt;
-&lt;&lt;if $hasEggs&gt;&gt;&lt;&lt;set $inventory.push(&quot;Eggs&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-Misc.:
-Compass (15 tomet) &lt;&lt;checkbox &quot;$hasCompass&quot; false true&gt;&gt;
-&lt;&lt;if $hasCompass&gt;&gt;&lt;&lt;set $inventory.push(&quot;Compass&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Map (15 tomet) &lt;&lt;checkbox &quot;$hasMap&quot; false true&gt;&gt;
-&lt;&lt;if $hasMap&gt;&gt;&lt;&lt;set $inventory.push(&quot;Map&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Tent (75 tomet) &lt;&lt;checkbox &quot;$hasTent&quot; false true&gt;&gt;
-&lt;&lt;if $hasTent&gt;&gt;&lt;&lt;set $inventory.push(&quot;Tent&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Flashlight (25 tomet) &lt;&lt;checkbox &quot;$hasFlashlight&quot; false true&gt;&gt;
-&lt;&lt;if $hasFlashlight&gt;&gt;&lt;&lt;set $inventory.push(&quot;Flashlight&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Water purifier (75 tomet) &lt;&lt;checkbox &quot;$hasWaterPurifier&quot; false true&gt;&gt;
-&lt;&lt;if $hasWaterPurifier&gt;&gt;&lt;&lt;set $inventory.push(&quot;Water purifier&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Sled (100 tomet) &lt;&lt;checkbox &quot;$hasSled&quot; false true&gt;&gt;
-&lt;&lt;if $hasSled&gt;&gt;&lt;&lt;set $inventory.push(&quot;Sled&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Fantomet (10 tomet) &lt;&lt;checkbox &quot;$hasFantomet&quot; false true&gt;&gt;
-&lt;&lt;if $hasFantomet&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fantomet&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Gasoline (10 tomet) &lt;&lt;checkbox &quot;$hasGasoline&quot; false true&gt;&gt;
-&lt;&lt;if $hasGasoline&gt;&gt;&lt;&lt;set $inventory.push(&quot;Gasoline&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Can opener (10 tomet) &lt;&lt;checkbox &quot;$hasCanOpener&quot; false true&gt;&gt;
-&lt;&lt;if $hasCanOpener&gt;&gt;&lt;&lt;set $inventory.push(&quot;Can opener&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Pocket knife (35 tomet) &lt;&lt;checkbox &quot;$hasPocketKnife&quot; false true&gt;&gt;
-&lt;&lt;if $hasPocketKnife&gt;&gt;&lt;&lt;set $inventory.push(&quot;Pocket knife&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-Fishing pole (35 tomet) &lt;&lt;checkbox &quot;$hasFishingPole&quot; false true&gt;&gt;
-&lt;&lt;if $hasFishingPole&gt;&gt;&lt;&lt;set $inventory.push(&quot;Fishing pole&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-Money: &lt;span id=&quot;money&quot;&gt;$money&lt;/span&gt;</tw-passagedata><tw-passagedata pid="28" name="She runs down a list of items." tags="" position="503,2100" size="100,100">connect to gossip // Jelena interrupts you </tw-passagedata><tw-passagedata pid="29" name="No, thank you." tags="" position="898.3333333333334,698" size="100,100">&quot;No, thank you,&quot; you say as you shift your bag&#39;s shoulder strap higher. &quot;There&#39;s a lot of heavy equipment in here, and some of it&#39;s very delicate. It would probably be better if I carry them.&quot; 
+&lt;div id=&quot;list&quot; class=&quot;list&quot;&gt;&lt;&lt;click &quot;Extra clothes:&quot;&gt;&gt;&lt;&lt;toggleclass &quot;#clothes&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;/click&gt;&gt;&lt;div id=&quot;clothes&quot; class=&quot;hidden&quot;&gt;Fur Coat (50 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 49&gt;&gt;
+	  &lt;&lt;set $furCoat += 1&gt;&gt;
+      &lt;&lt;set $money -=50&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+	  &lt;&lt;replace &quot;#furCoat&quot;&gt;&gt;&lt;&lt;print $furCoat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $furCoat gt 0&gt;&gt;
+      &lt;&lt;set $furCoat -= 1&gt;&gt;
+      &lt;&lt;set $money +=50&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+	  &lt;&lt;replace &quot;#furCoat&quot;&gt;&gt;&lt;&lt;print $furCoat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;furCoat&quot;&gt;$furCoat&lt;/span&gt;
+Pants (25 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 24&gt;&gt;
+	  &lt;&lt;set $pants += 1&gt;&gt;
+      &lt;&lt;set $money -=25&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#pants&quot;&gt;&gt;&lt;&lt;print $pants&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $pants gt 0&gt;&gt;
+      &lt;&lt;set $pants -= 1&gt;&gt;
+      &lt;&lt;set $money +=25&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#pants&quot;&gt;&gt;&lt;&lt;print $pants&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;pants&quot;&gt;$pants&lt;/span&gt;
+Shirts (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 14&gt;&gt;
+	  &lt;&lt;set $shirts += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;      
+      &lt;&lt;replace &quot;#shirts&quot;&gt;&gt;&lt;&lt;print $shirts&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $shirts gt 0&gt;&gt;
+      &lt;&lt;set $shirts -= 1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#shirts&quot;&gt;&gt;&lt;&lt;print $shirts&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;shirts&quot;&gt;$shirts&lt;/span&gt;
+Shorts (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 0&gt;&gt;
+	  &lt;&lt;set $shorts += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#shorts&quot;&gt;&gt;&lt;&lt;print $shorts&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $shorts gt 0&gt;&gt;
+      &lt;&lt;set $shorts -= 1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#shorts&quot;&gt;&gt;&lt;&lt;print $shorts&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;shorts&quot;&gt;$shorts&lt;/span&gt;
+Gloves (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $gloves += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#gloves&quot;&gt;&gt;&lt;&lt;print $gloves&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $gloves gt 0&gt;&gt;
+      &lt;&lt;set $gloves -= 1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#gloves&quot;&gt;&gt;&lt;&lt;print $gloves&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;gloves&quot;&gt;$gloves&lt;/span&gt;
+Swimsuit (20 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 19&gt;&gt;
+	  &lt;&lt;set $swimsuit += 1&gt;&gt;
+      &lt;&lt;set $money -=20&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#swimsuit&quot;&gt;&gt;&lt;&lt;print $swimsuit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $swimsuit gt 0&gt;&gt;
+      &lt;&lt;set $swimsuit -= 1&gt;&gt;
+      &lt;&lt;set $money +=20&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#swimsuit&quot;&gt;&gt;&lt;&lt;print $swimsuit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;swimsuit&quot;&gt;$swimsuit&lt;/span&gt;
+Socks (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $socks += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#socks&quot;&gt;&gt;&lt;&lt;print $socks&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $socks gt 0&gt;&gt;
+      &lt;&lt;set $socks -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#socks&quot;&gt;&gt;&lt;&lt;print $socks&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;socks&quot;&gt;$socks&lt;/span&gt;
+Swimming Goggles (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 14&gt;&gt;
+	  &lt;&lt;set $goggles += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#goggles&quot;&gt;&gt;&lt;&lt;print $goggles&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $goggles gt 0&gt;&gt;
+      &lt;&lt;set $goggles -=1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#goggles&quot;&gt;&gt;&lt;&lt;print $goggles&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;goggles&quot;&gt;$goggles&lt;/span&gt;
+Boots (30 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 29&gt;&gt;
+	  &lt;&lt;set $boots += 1&gt;&gt;
+      &lt;&lt;set $money -=30&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#boots&quot;&gt;&gt;&lt;&lt;print $boots&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $boots gt 0&gt;&gt;
+      &lt;&lt;set $boots -=1&gt;&gt;
+      &lt;&lt;set $money +=30&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#boots&quot;&gt;&gt;&lt;&lt;print $boots&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;boots&quot;&gt;$boots&lt;/span&gt;
+Snowshoes (30 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 29&gt;&gt;
+	  &lt;&lt;set $snowshoes += 1&gt;&gt;
+      &lt;&lt;set $money -=30&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#snowshoes&quot;&gt;&gt;&lt;&lt;print $snowshoes&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $snowshoes gt 0&gt;&gt;
+      &lt;&lt;set $snowshoes -=1&gt;&gt;
+      &lt;&lt;set $money +=30&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#snowshoes&quot;&gt;&gt;&lt;&lt;print $snowshoes&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/link&gt;&gt; &lt;span id=&quot;snowshoes&quot;&gt;$snowshoes&lt;/span&gt;&lt;/div&gt;
+&lt;&lt;click &quot;Print:&quot;&gt;&gt;&lt;&lt;toggleclass &quot;#print&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;/click&gt;&gt;&lt;div id=&quot;print&quot; class=&quot;hidden&quot;&gt;Map (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 14&gt;&gt;
+	  &lt;&lt;set $map += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#map&quot;&gt;&gt;&lt;&lt;print $map&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $map gt 0&gt;&gt;
+      &lt;&lt;set $map -=1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#map&quot;&gt;&gt;&lt;&lt;print $map&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;map&quot;&gt;$map&lt;/span&gt;
+The Lost City of Ondkraft (10 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 9&gt;&gt;
+	  &lt;&lt;set $lostcity += 1&gt;&gt;
+      &lt;&lt;set $money -=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#lostcity&quot;&gt;&gt;&lt;&lt;print $lostcity&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $lostcity gt 0&gt;&gt;
+      &lt;&lt;set $lostcity -=1&gt;&gt;
+      &lt;&lt;set $money +=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#lostcity&quot;&gt;&gt;&lt;&lt;print $lostcity&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;lostcity&quot;&gt;$lostcity&lt;/span&gt;
+An Introduction to Grenseøya Dialects (5 tomet)  &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $intro += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#intro&quot;&gt;&gt;&lt;&lt;print $intro&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $intro gt 0&gt;&gt;
+      &lt;&lt;set $intro -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#intro&quot;&gt;&gt;&lt;&lt;print $intro&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;intro&quot;&gt;$intro&lt;/span&gt;
+Siouxie and the Fish (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $childbook += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#childbook&quot;&gt;&gt;&lt;&lt;print $childbook&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $childbook gt 0&gt;&gt;
+      &lt;&lt;set $childbook -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#childbook&quot;&gt;&gt;&lt;&lt;print $childbook&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/link&gt;&gt; &lt;span id=&quot;childbook&quot;&gt;$childbook&lt;/span&gt;&lt;/div&gt;
+&lt;&lt;click &quot;Food:&quot;&gt;&gt;&lt;&lt;toggleclass &quot;#food&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;/click&gt;&gt;&lt;div id=&quot;food&quot; class=&quot;hidden&quot;&gt;Canned meats (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $cannedmeat += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedmeat&quot;&gt;&gt;&lt;&lt;print $cannedmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $cannedmeat gt 0&gt;&gt;
+      &lt;&lt;set $cannedmeat -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedmeat&quot;&gt;&gt;&lt;&lt;print $cannedmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;cannedmeat&quot;&gt;$cannedmeat&lt;/span&gt;
+Canned fruit (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $cannedfruit += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedfruit&quot;&gt;&gt;&lt;&lt;print $cannedfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $cannedfruit gt 0&gt;&gt;
+      &lt;&lt;set $cannedfruit -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedfruit&quot;&gt;&gt;&lt;&lt;print $cannedfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;cannedfruit&quot;&gt;$cannedfruit&lt;/span&gt;
+Canned vegetables (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $cannedveg += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedveg&quot;&gt;&gt;&lt;&lt;print $cannedveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $cannedveg gt 0&gt;&gt;
+      &lt;&lt;set $cannedveg -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#cannedveg&quot;&gt;&gt;&lt;&lt;print $cannedveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;cannedveg&quot;&gt;$cannedveg&lt;/span&gt;
+Dried meat (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $driedmeat += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedmeat&quot;&gt;&gt;&lt;&lt;print $driedmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $driedmeat gt 0&gt;&gt;
+      &lt;&lt;set $driedmeat -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedmeat&quot;&gt;&gt;&lt;&lt;print $driedmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;driedmeat&quot;&gt;$driedmeat&lt;/span&gt;
+Dried fruit (7 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 6&gt;&gt;
+	  &lt;&lt;set $driedfruit += 1&gt;&gt;
+      &lt;&lt;set $money -=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedfruit&quot;&gt;&gt;&lt;&lt;print $driedfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $driedfruit gt 0&gt;&gt;
+      &lt;&lt;set $driedfruit -=1&gt;&gt;
+      &lt;&lt;set $money +=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedfruit&quot;&gt;&gt;&lt;&lt;print $driedfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;driedfruit&quot;&gt;$driedfruit&lt;/span&gt;
+Dried vegetables (7 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 6&gt;&gt;
+	  &lt;&lt;set $driedveg += 1&gt;&gt;
+      &lt;&lt;set $money -=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedveg&quot;&gt;&gt;&lt;&lt;print $driedveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $driedveg gt 0&gt;&gt;
+      &lt;&lt;set $driedveg -=1&gt;&gt;
+      &lt;&lt;set $money +=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#driedveg&quot;&gt;&gt;&lt;&lt;print $driedveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;driedveg&quot;&gt;$driedveg&lt;/span&gt;
+Fresh fruit (7 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 6&gt;&gt;
+	  &lt;&lt;set $freshfruit += 1&gt;&gt;
+      &lt;&lt;set $money -=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshfruit&quot;&gt;&gt;&lt;&lt;print $freshfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $freshfruit gt 0&gt;&gt;
+      &lt;&lt;set $freshfruit -=1&gt;&gt;
+      &lt;&lt;set $money +=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshfruit&quot;&gt;&gt;&lt;&lt;print $freshfruit&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;freshfruit&quot;&gt;$freshfruit&lt;/span&gt;
+Fresh vegetables (7 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 6&gt;&gt;
+	  &lt;&lt;set $freshveg += 1&gt;&gt;
+      &lt;&lt;set $money -=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshveg&quot;&gt;&gt;&lt;&lt;print $freshveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $freshveg gt 0&gt;&gt;
+      &lt;&lt;set $freshveg -=1&gt;&gt;
+      &lt;&lt;set $money +=7&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshveg&quot;&gt;&gt;&lt;&lt;print $freshveg&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;freshveg&quot;&gt;$freshveg&lt;/span&gt;
+Fresh meat (5 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 4&gt;&gt;
+	  &lt;&lt;set $freshmeat += 1&gt;&gt;
+      &lt;&lt;set $money -=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshmeat&quot;&gt;&gt;&lt;&lt;print $freshmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $freshmeat gt 0&gt;&gt;
+      &lt;&lt;set $freshmeat -=1&gt;&gt;
+      &lt;&lt;set $money +=5&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#freshmeat&quot;&gt;&gt;&lt;&lt;print $freshmeat&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;freshmeat&quot;&gt;$freshmeat&lt;/span&gt;
+Eggs (3 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 2&gt;&gt;
+	  &lt;&lt;set $eggs += 1&gt;&gt;
+      &lt;&lt;set $money -=3&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#eggs&quot;&gt;&gt;&lt;&lt;print $eggs&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $eggs gt 0&gt;&gt;
+      &lt;&lt;set $eggs -=1&gt;&gt;
+      &lt;&lt;set $money +=3&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#eggs&quot;&gt;&gt;&lt;&lt;print $eggs&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/link&gt;&gt; &lt;span id=&quot;eggs&quot;&gt;$eggs&lt;/span&gt;&lt;/div&gt;
+&lt;&lt;click &quot;Miscellaneous:&quot;&gt;&gt;&lt;&lt;toggleclass &quot;#misc&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;/click&gt;&gt;
+&lt;div id=&quot;misc&quot; class=&quot;hidden&quot;&gt;Compass (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 14&gt;&gt;
+	  &lt;&lt;set $compass += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#compass&quot;&gt;&gt;&lt;&lt;print $compass&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $compass gt 0&gt;&gt;
+      &lt;&lt;set $compass -=1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#compass&quot;&gt;&gt;&lt;&lt;print $compass&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;compass&quot;&gt;$compass&lt;/span&gt;
+Tent (75 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 74&gt;&gt;
+	  &lt;&lt;set $tent += 1&gt;&gt;
+      &lt;&lt;set $money -=75&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#tent&quot;&gt;&gt;&lt;&lt;print $tent&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $tent gt 0&gt;&gt;
+      &lt;&lt;set $tent -=1&gt;&gt;
+      &lt;&lt;set $money +=75&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#tent&quot;&gt;&gt;&lt;&lt;print $tent&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;tent&quot;&gt;$tent&lt;/span&gt;
+Lantern (25 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 24&gt;&gt;
+	  &lt;&lt;set $lantern += 1&gt;&gt;
+      &lt;&lt;set $money -=25&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#lantern&quot;&gt;&gt;&lt;&lt;print $lantern&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $lantern gt 0&gt;&gt;
+      &lt;&lt;set $lantern -=1&gt;&gt;
+      &lt;&lt;set $money +=25&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#lantern&quot;&gt;&gt;&lt;&lt;print $lantern&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;lantern&quot;&gt;$lantern&lt;/span&gt;
+Water purifier (75 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 74&gt;&gt;
+	  &lt;&lt;set $purifier += 1&gt;&gt;
+      &lt;&lt;set $money -=75&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#purifier&quot;&gt;&gt;&lt;&lt;print $purifier&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $purifier gt 0&gt;&gt;
+      &lt;&lt;set $purifier -=1&gt;&gt;
+      &lt;&lt;set $money +=75&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#purifier&quot;&gt;&gt;&lt;&lt;print $purifier&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;purifier&quot;&gt;$purifier&lt;/span&gt;
+Waterskein (15 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 14&gt;&gt;
+	  &lt;&lt;set $waterskein += 1&gt;&gt;
+      &lt;&lt;set $money -=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#waterskein&quot;&gt;&gt;&lt;&lt;print $waterskein&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $waterskein gt 0&gt;&gt;
+      &lt;&lt;set $waterskein -=1&gt;&gt;
+      &lt;&lt;set $money +=15&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#waterskein&quot;&gt;&gt;&lt;&lt;print $waterskein&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;waterskein&quot;&gt;$waterskein&lt;/span&gt;
+Sled (100 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 99&gt;&gt;
+	  &lt;&lt;set $sled += 1&gt;&gt;
+      &lt;&lt;set $money -=100&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#sled&quot;&gt;&gt;&lt;&lt;print $sled&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $sled gt 0&gt;&gt;
+      &lt;&lt;set $sled -=1&gt;&gt;
+      &lt;&lt;set $money +=100&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#sled&quot;&gt;&gt;&lt;&lt;print $sled&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;sled&quot;&gt;$sled&lt;/span&gt;
+Fantomet (10 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 9&gt;&gt;
+	  &lt;&lt;set $fantomet += 1&gt;&gt;
+      &lt;&lt;set $money -=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fantomet&quot;&gt;&gt;&lt;&lt;print $fantomet&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $fantomet gt 0&gt;&gt;
+      &lt;&lt;set $fantomet -=1&gt;&gt;
+      &lt;&lt;set $money +=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fantomet&quot;&gt;&gt;&lt;&lt;print $fantomet&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;fantomet&quot;&gt;$fantomet&lt;/span&gt;
+Fuel (10 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 9&gt;&gt;
+	  &lt;&lt;set $fuel += 1&gt;&gt;
+      &lt;&lt;set $money -=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fuel&quot;&gt;&gt;&lt;&lt;print $fuel&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $fuel gt 0&gt;&gt;
+      &lt;&lt;set $fuel -=1&gt;&gt;
+      &lt;&lt;set $money +=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fuel&quot;&gt;&gt;&lt;&lt;print $fuel&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;fuel&quot;&gt;$fuel&lt;/span&gt;
+Can opener (10 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 9&gt;&gt;
+	  &lt;&lt;set $canopener += 1&gt;&gt;
+      &lt;&lt;set $money -=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#canopener&quot;&gt;&gt;&lt;&lt;print $canopener&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $canopener gt 0&gt;&gt;
+      &lt;&lt;set $canopener -=1&gt;&gt;
+      &lt;&lt;set $money +=10&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#canopener&quot;&gt;&gt;&lt;&lt;print $canopener&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;canopener&quot;&gt;$canopener&lt;/span&gt;
+Pocket knife (35 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 34&gt;&gt;
+	  &lt;&lt;set $knife += 1&gt;&gt;
+      &lt;&lt;set $money -=35&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#knife&quot;&gt;&gt;&lt;&lt;print $knife&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $knife gt 0&gt;&gt;
+      &lt;&lt;set $knife -=1&gt;&gt;
+      &lt;&lt;set $money +=35&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#knife&quot;&gt;&gt;&lt;&lt;print $knife&gt;&gt;&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;span id=&quot;knife&quot;&gt;$knife&lt;/span&gt;
+Fishing pole (35 tomet) &lt;&lt;link &quot;[+]&quot;&gt;&gt;
+    &lt;&lt;if $money gt 34&gt;&gt;
+	  &lt;&lt;set $fishing += 1&gt;&gt;
+      &lt;&lt;set $money -=35&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fishing&quot;&gt;&gt;&lt;&lt;print $fishing&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;[-]&quot;&gt;&gt;
+    &lt;&lt;if $fishing gt 0&gt;&gt;
+      &lt;&lt;set $fishing -=1&gt;&gt;
+      &lt;&lt;set $money +=35&gt;&gt;
+      &lt;&lt;replace &quot;#money&quot;&gt;&gt;&lt;&lt;print $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+      &lt;&lt;replace &quot;#fishing&quot;&gt;&gt;&lt;&lt;print $fishing&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt; &lt;span id=&quot;fishing&quot;&gt;$fishing&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+[[Purchase items|interrupted]]
+&lt;&lt;timed 60s&gt;&gt;goto &quot;interrupted&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="No, thank you." tags="" position="898,698" size="100,100">&quot;No, thank you,&quot; you say as you shift your bag&#39;s shoulder strap higher. &quot;There&#39;s a lot of heavy equipment in here, and some of it&#39;s very delicate. It would probably be better if I carry them.&quot; 
 
 “My name is Oskar,” he says while watching you gather the rest of your luggage. 
 
@@ -636,19 +1161,19 @@ Money: &lt;span id=&quot;money&quot;&gt;$money&lt;/span&gt;</tw-passagedata><tw-
 
 [[Your mind wanders as the landscape around you changes.-&gt;Questions]]
 
-</tw-passagedata><tw-passagedata pid="30" name="You see someone walking towards &quot;Anja&#39;s&quot;" tags="" position="1400,2098" size="100,100">You see someone walking towards &quot;Anja&#39;s&quot; with a purpose. They&#39;re wearing a bulky fur coat and a large matching hat. The lower half of their face is covered by a thick mask. 
+</tw-passagedata><tw-passagedata pid="28" name="You see someone walking towards &quot;Anja&#39;s&quot;" tags="" position="1400,2098" size="100,100">You see someone walking towards &quot;Anja&#39;s&quot; with a purpose. They&#39;re wearing a bulky fur coat and a large matching hat. The lower half of their face is covered by a thick mask. 
 
 You begin to move out of the stranger&#39;s way. That&#39;s someone you don&#39;t want to mess with; however, as you discreetly shift away, their gloved hand roughly grabs your arm. 
 
 &quot;Hey! I&#39;m waiting for someone,&quot; you protest. 
 
 [[The stranger pulls you into the store.|dragged in]]
-[[You try to fight back.|dragged in][$karma -=1]] </tw-passagedata><tw-passagedata pid="31" name="login" tags="login" position="1097,103" size="100,100">[img[&quot;https://media.discordapp.net/attachments/474843885575864320/654587800007606272/englene.png&quot;]]
+[[You try to fight back.|dragged in][$karma -=1]] </tw-passagedata><tw-passagedata pid="29" name="login" tags="login" position="1097,103" size="100,100">[img[&quot;https://media.discordapp.net/attachments/474843885575864320/654587800007606272/englene.png&quot;]]
 &lt;html&gt;
 
 &lt;span title=&quot;&lt;&lt;textbox &amp;quot;$name&amp;quot; &amp;quot;&amp;quot;&gt;&gt;&quot; aria-label=&quot;&lt;&lt;textbox &amp;quot;$name&amp;quot; &amp;quot;&amp;quot;&gt;&gt;&quot; data-type=&quot;macro&quot; data-name=&quot;textbox&quot; class=&quot;debug block&quot;&gt;
 &lt;label for=&quot;textbox-name&quot;&gt;Name:&lt;/label&gt;
-&lt;input id=&quot;textbox-name&quot; name=&quot;textbox-name&quot; type=&quot;text&quot; tabindex=&quot;0&quot; class=&quot;macro-textbox&quot; placeholder=&quot;ex: Elsa Àrnadalr&quot; required=&quot;true&quot; autocomplete=&quot;off&quot;&gt;&lt;/span&gt;
+&lt;input id=&quot;textbox-name&quot; name=&quot;textbox-name&quot; type=&quot;text&quot; tabindex=&quot;0&quot; class=&quot;macro-textbox&quot; placeholder=&quot;Àrnadalr&quot; required=&quot;true&quot; autocomplete=&quot;off&quot;&gt;&lt;/span&gt;
 
 &lt;input type=&quot;submit&quot; id=&quot;next&quot; value=&quot;Next&quot; tabindex=&quot;0&quot; &gt;
 
@@ -670,8 +1195,8 @@ document.getElementById(&#39;next&#39;).onclick = function() {
 
 &lt;/script&gt;
 &lt;/html&gt;
-&lt;&lt;button [[Login|letter]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Questions" tags="" position="803,837" size="100,100">Your journey on Grenseøya begins, and you consider asking Oskar some of the questions you have...
-&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Your questions" tags="" position="1001,874" size="100,100">&lt;&lt;if $expo == 0&gt;&gt;&lt;&lt;if $heardFremmed&gt;&gt;&lt;&lt;actions 
+&lt;&lt;button [[Login|letter]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Questions" tags="" position="799,837" size="100,100">&lt;&lt;set $people.push(&quot;Oskar&quot;)&gt;&gt;Your journey on Grenseøya begins, and you consider asking Oskar some of the questions you have...
+&lt;&lt;display &quot;Your questions&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Your questions" tags="" position="1001,874" size="100,100">&lt;&lt;if $expo == 0&gt;&gt;&lt;&lt;if $heardFremmed&gt;&gt;&lt;&lt;actions 
 	  [[&#39;&quot;What’s Ved Fjellet like?&quot;&#39;|Ved Fjellet?][$heardDimman to true]] 
 	  [[Ask about research supplies|Supplies?][$heardDimman to true]] 
 	  [[Get another perspective on fantomet|Fantomet?][$heardDimman to true]]
@@ -707,12 +1232,12 @@ document.getElementById(&#39;next&#39;).onclick = function() {
 	[[You arrive.|Ved Fjellet]]&gt;&gt;
   &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="34" name="advice?" tags="" position="802,1724" size="100,100">&lt;&lt;set $guide to false&gt;&gt;
+</tw-passagedata><tw-passagedata pid="32" name="advice?" tags="" position="802,1724" size="100,100">&lt;&lt;set $guide to false&gt;&gt;
 Oskar thinks for a moment, “Listen to Jelena. She is young, but she is very experienced. She knows the land, and how to survive out there.” 
 
 Oskar rummages around in his pocket and hands you some coins, “I don’t know how much money you were given for supplies, but I hope this helps. If you’re smart, you’ll give your money to Joanna and let her pick out your supplies for the trip, too. She’ll know exactly what to buy.&quot; 
 &lt;&lt;display &quot;Your questions 2&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="35" name="dragged in" tags="" position="1200,2298" size="100,100">You shortly find yourself standing inside of &quot;Anja&#39;s.&quot; 
+</tw-passagedata><tw-passagedata pid="33" name="dragged in" tags="" position="1200,2298" size="100,100">You shortly find yourself standing inside of &quot;Anja&#39;s.&quot; 
 
 The stranger pulls down their mask and unzips their jacket. Suddenly, they&#39;re not the hulking menace you saw at first glance but just a woman. She&#39;s of average height and build as far as you can tell.
 
@@ -733,7 +1258,8 @@ Oh.
 She had a point, but still...
 
 [[&#39;&quot;And you&#39;re qualified?&quot;&#39;|guide-doubt][$karma -= 1]]
-[[Put your best foot forward.|good team][$karma += 1]]</tw-passagedata><tw-passagedata pid="36" name="guide-doubt" tags="" position="900.3333333333334,2601.6666666666665" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
+[[Put your best foot forward.|good team][$karma += 1]]
+&lt;&lt;if $people.indexOf(&quot;Jelena&quot;) == -1&gt;&gt;&lt;&lt;set $people.push(&quot;Jelena&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="guide-doubt" tags="" position="900,2601" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
 
 &quot;You&#39;re really young,&quot; you comment. &quot;Are you sure you can handle things out there? This isn&#39;t going to be an easy journey.&quot; 
 
@@ -742,13 +1268,13 @@ Jelena scoffs, &quot;I know a lot more than you do, //fremmed//.&quot;
 [[You appologize.|What supplies?][$karma += 1]] 
 [[You change the conversation.|What supplies?][$karma -= 1]]
 
-&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="good team" tags="" position="1103,2597" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
+&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="good team" tags="" position="1103,2597" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
 
 &quot;Remember that what I say goes,&quot; she tells you. &quot;You do; we live.&quot;
 
 [[You nod.|What supplies?]]
 [[You give your word.|What supplies?][$karma += 1]]
-[[How hard could it be?|What supplies?][$karma -=1]]</tw-passagedata><tw-passagedata pid="38" name="What supplies?" tags="" position="903,2795" size="100,100">&quot;I have most of what we&#39;ll need already,&quot; Jelena says. &quot;What do our funds look like, though?&quot; 
+[[How hard could it be?|What supplies?][$karma -=1]]</tw-passagedata><tw-passagedata pid="36" name="What supplies?" tags="" position="899,2800" size="100,100">&quot;I have most of what we&#39;ll need already,&quot; Jelena says. &quot;What do our funds look like, though?&quot; 
 
 &quot;We have $money tomet,&quot; you reply. 
 
@@ -761,7 +1287,7 @@ You hand over the money.
 [[You wait.]] 
 [[&quot;Actually where&#39;s the bathroom?&quot;]] 
 
-</tw-passagedata><tw-passagedata pid="39" name="You wait." tags="" position="800.6666666666666,3004" size="100,100">You get the feeling Jelena doesn&#39;t like you. The clerk seems much nicer, greeting you warmly and striking up a conversation.
+&lt;&lt;set $hasMoney to false&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="You wait." tags="" position="800,3004" size="100,100">You get the feeling Jelena doesn&#39;t like you. The clerk seems much nicer, greeting you warmly and striking up a conversation.
 
 &quot;What brings you to Grenseøya?&quot; The clerk asks. 
 
@@ -775,13 +1301,13 @@ You hand over the money.
 
 Before you can ask any more questions, [[someone enters the store.|gossip]]
 
-</tw-passagedata><tw-passagedata pid="40" name="&quot;Actually where&#39;s the bathroom?&quot;" tags="" position="1004,2996" size="100,100">Jelena is not impressed as she directs you to the bathroom. You get the feeling she doesn&#39;t like you. It&#39;s not like you can help that nature&#39;s calling.
+</tw-passagedata><tw-passagedata pid="38" name="&quot;Actually where&#39;s the bathroom?&quot;" tags="" position="1004,2996" size="100,100">Jelena is not impressed as she directs you to the bathroom. You get the feeling she doesn&#39;t like you. It&#39;s not like you can help that nature&#39;s calling.
 
 At any rate, you return in time to see...
 
 [[A woman gossipping with the clerk|gossip]]
 [[The clerk ringing up Jelena&#39;s purchases|end of shop]]
-[[A young boy helping her bring things to the counter|brother]]</tw-passagedata><tw-passagedata pid="41" name="gossip" tags="" position="699.6666666666666,3202.3333333333335" size="100,100">The clerk seems to know the woman, easily helping her find her purchases without many words exchanged at all. It isn&#39;t until the clerk is ringing her up that they speak. In the quiet, small shop, you can&#39;t help but overhear.
+[[A young boy helping her bring things to the counter|brother]]</tw-passagedata><tw-passagedata pid="39" name="gossip" tags="" position="699,3202" size="100,100">The clerk seems to know the woman, easily helping her find her purchases without many words exchanged at all. It isn&#39;t until the clerk is ringing her up that they speak. In the small shop, you can&#39;t help but overhear.
 
 &quot;I&#39;m sorry for your loss,&quot; the clerk says. &quot;Rydir was a good man.&quot;
 
@@ -795,29 +1321,43 @@ The clerk looks at you as if realizing you are still here. &quot;Oh! You heard a
 
 It was kind of hard not to. You shrug.
 
-&quot;It&#39;s a shame, even experienced hunters are being lost to the //Dimann// nowadays. So unpredictable, no one can track it.&quot; There&#39;s a moment. &quot;Not that Jelena will have those difficulties!&quot; You hadn&#39;t even considered that. &quot;I&#39;m sure you two will be perfectly safe.&quot;
+&quot;It&#39;s a shame; even experienced hunters are being lost to the //Dimann// nowadays. So unpredictable, no one can track it.&quot; There&#39;s a moment. &quot;Not that Jelena will have those difficulties!&quot; You hadn&#39;t even considered that. &quot;I&#39;m sure you two will be perfectly safe.&quot;
 
 You aren&#39;t reassured.
 
 [[Jelena returns.|end of shop]]
 
-&lt;&lt;set $hasGossip = true&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="end of shop" tags="" position="899.3333333333334,3239.3333333333335" size="100,100">The clerk rings up what Jelena bought. 
+&lt;&lt;set $hasGossip = true&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="end of shop" tags="" position="899,3239" size="100,100">The clerk rings up what Jelena bought. 
 
 &quot;I&#39;ll show you where we&#39;re sleeping tonight.&quot; Jelena tosses a bag at you. &quot;We leave at dawn.&quot; 
 
-[[The next day|the first day]]</tw-passagedata><tw-passagedata pid="43" name="brother" tags="" position="1099,3200.6666666666665" size="100,100">&quot;But the //Dimmann// is so unpredictable! Even Rydir—&quot; It was a boy arguing with Jelena.
+[[The next day|the first day]]
+
+&lt;&lt;addToInv &quot;fur coat&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;pants&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;shirts&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;gloves&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;boots&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;snowshoes&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;regional map&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;compass&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;waterskein&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;can opener&quot;&gt;&gt;
+&lt;&lt;addToInv &quot;pocket knife&quot;&gt;&gt;
+&lt;&lt;set $money = 250&gt;&gt;
+</tw-passagedata><tw-passagedata pid="41" name="brother" tags="" position="1099,3200" size="100,100">&quot;But the //Dimmann// is so unpredictable! Even Rydir—&quot; you overhear the boy arguing with Jelena even as he helps her.
 
 &quot;I&#39;m not him; I have experience. I know how to track the //Dimman.// He was too stuck on the past. The environment has changed, and I&#39;ve learned to change with it,&quot; she says. 
 
 That silences him as Jelena continues piling supplies onto the counter.
 
-&quot;Do you have to go?&quot; you overhear the boy ask. He sounds scared.
+&quot;Do you have to go?&quot; the boy asks. He sounds scared.
 
 &quot;I&#39;ll be fine,&quot; she promises him. 
 
-You aren&#39;t reassured. You don&#39;t think the boy is either as he leaves.
+You aren&#39;t reassured. You don&#39;t think the boy is either as he passes you by on his way out.
 
-[[You bump into a pile of books, apologizing as their eyes fall on you.|end of shop]]</tw-passagedata><tw-passagedata pid="44" name="the first day" tags="" position="897.6666666666666,3403.6666666666665" size="100,100">When she said &#39;at dawn,&#39; she meant, &#39;I&#39;ll wake you up before dawn to prepare.&#39; And it wasn&#39;t a //nice// wake-up either.
+[[You bump into a pile of books, apologizing as their eyes fall on you.|end of shop]]</tw-passagedata><tw-passagedata pid="42" name="the first day" tags="" position="898,3401" size="100,100">When she said &#39;at dawn,&#39; she meant, &#39;I&#39;ll wake you up before dawn to prepare.&#39; And it wasn&#39;t a //nice// wake-up either.
 
 You could barely keep your eyes open. And you sputter as some kind of cloth introduces itself to your face.
 
@@ -836,20 +1376,20 @@ She hesitates, and then, &quot;Have you packed everything yet?&quot;
 [[Show her.][$karma +=1]] 
 [[&#39;&quot;I have everything.&quot;&#39;][$karma -=1]] 
 
-</tw-passagedata><tw-passagedata pid="45" name="&#39;&quot;Someone has to.&quot;&#39;" tags="" position="703,3696" size="100,100">Jelena considers what you just said, &quot;...I see. &quot;Dawn&#39;s almost here. You should finish getting ready.&quot; 
+</tw-passagedata><tw-passagedata pid="43" name="&#39;&quot;Someone has to.&quot;&#39;" tags="" position="703,3696" size="100,100">Jelena considers what you just said, &quot;...I see. &quot;Dawn&#39;s almost here. You should finish getting ready.&quot; 
 
-[[Dawn breaks.]]</tw-passagedata><tw-passagedata pid="46" name="&#39;&quot;That&#39;s why I have you.&quot;&#39;" tags="" position="1099.6666666666667,3701.3333333333335" size="100,100">&quot;I&#39;m being paid,&quot; Jelena says. 
+[[Dawn breaks.]]</tw-passagedata><tw-passagedata pid="44" name="&#39;&quot;That&#39;s why I have you.&quot;&#39;" tags="" position="1099,3701" size="100,100">&quot;I&#39;m being paid,&quot; Jelena says. 
 
 You think she&#39;s going to leave it at just that, but she continues. 
 
 &lt;&lt;if $karma &gt; 0&gt;&gt;&quot;We have a saying here: &#39;A closed heart cannot hear life.&#39; May your heart be open,&quot; She tells you. It almost sounds like a prayer. &lt;&lt;/if&gt;&gt;&quot;Dawn&#39;s almost here. You should finish getting ready.&quot; 
 
-[[Dawn breaks.]]</tw-passagedata><tw-passagedata pid="47" name="Dawn breaks." tags="" position="902.3333333333334,3800.3333333333335" size="100,100">It&#39;s dawn, and you and Jelena are finally packed. 
+[[Dawn breaks.]]</tw-passagedata><tw-passagedata pid="45" name="Dawn breaks." tags="" position="902,3800" size="100,100">It&#39;s dawn, and you and Jelena are finally packed. 
 
 Before you leave, you consider asking Jelena some questions... 
 
 [[Where are we going?|First Stop]]
-[[Where&#39;s the nearest fantomet?|First Stop]] </tw-passagedata><tw-passagedata pid="48" name="Show her." tags="" position="703,3495" size="100,100">Jelena digs through your bags and fishes out your flashlight. &quot;What is this? Where did you get it from?&quot;
+[[Where&#39;s the nearest fantomet?|First Stop]] </tw-passagedata><tw-passagedata pid="46" name="Show her." tags="" position="699,3498" size="100,100">Jelena digs through your bags and fishes out your flashlight. &quot;What is this? Where did you get it from?&quot;
 
 &quot;It&#39;s a flashlight,&quot; you answer. &quot;I brought it from home.&quot;
 
@@ -857,12 +1397,12 @@ Before you leave, you consider asking Jelena some questions...
 
 You nod, and continue getting ready. You&#39;re almost done packing your belongings when [[Jelena speaks up again.|Jelena asks]] 
 
-&lt;&lt;removeFromInv flashlight&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="&#39;&quot;I have everything.&quot;&#39;" tags="" position="1104,3497" size="100,100">&quot;I have everything I need. Nothing&#39;s missing; just let me finish packing,&quot; you tell her. 
+&lt;&lt;removeFromInv flashlight&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="&#39;&quot;I have everything.&quot;&#39;" tags="" position="1104,3497" size="100,100">&quot;I have everything I need. Nothing&#39;s missing; just let me finish packing,&quot; you tell her. 
 
 Jelena looks annoyed but doesn&#39;t question you further. 
 
 You continue getting ready. You&#39;re almost done packing your belongings when [[Jelena speaks up again.|Jelena asks]] 
-</tw-passagedata><tw-passagedata pid="50" name="Jelena asks" tags="" position="900.3333333333334,3599.6666666666665" size="100,100">&quot;What do you wish to find?&quot; Jelena asks quietly. 
+</tw-passagedata><tw-passagedata pid="48" name="Jelena asks" tags="" position="900,3599" size="100,100">&quot;What do you wish to find?&quot; Jelena asks quietly. 
 
 It was the softest you had ever heard Jelena speak. You took a moment to really think about your answer. &quot;Well, back home we discovered how to use fantomet, but we never really figured out what it actually is or does. Phantomfelt has the largest untouched reservoir of fantomet, and is said to have a rich history in fantomet. I want to study that.”
 
@@ -876,27 +1416,27 @@ You hesistate. “Well…&quot;
 
 [[&#39;&quot;Someone has to.&quot;&#39;][$karma +=1]] 
 [[&#39;&quot;That&#39;s why I have you.&quot;&#39;][$karma -=1]]
-</tw-passagedata><tw-passagedata pid="51" name="First Stop" tags="" position="900.6666666666666,3997" size="100,100">&quot;We&#39;re not leaving Ved Fjellet yet,&quot; Jelena says. &quot;I need to visit someone on the outskirts of the town first. They have more information on environment we&#39;re heading into.&quot; 
+</tw-passagedata><tw-passagedata pid="49" name="First Stop" tags="" position="900,3997" size="100,100">&quot;We&#39;re not leaving Ved Fjellet yet,&quot; Jelena says. &quot;I need to visit someone on the outskirts of the town first. They have more information on environment we&#39;re heading into.&quot; 
 
 [[&#39;&quot;I thought you were an experienced guide?&quot;&#39;][$karma -=1]] 
 [[&quot;How long will the visit be?&quot;]]
-</tw-passagedata><tw-passagedata pid="52" name="&#39;&quot;I thought you were an experienced guide?&quot;&#39;" tags="" position="1102,4097" size="100,100">Jelena scoffs, &quot;I am experienced. I know to make this stop //from// experience. Things change out there too quickly, and I don&#39;t live on the outskirts. We need to know what we&#39;re walking into.&quot; 
+</tw-passagedata><tw-passagedata pid="50" name="&#39;&quot;I thought you were an experienced guide?&quot;&#39;" tags="" position="1102,4097" size="100,100">Jelena scoffs, &quot;I am experienced. I know to make this stop //from// experience. Things change out there too quickly, and I don&#39;t live on the outskirts. We need to know what we&#39;re walking into.&quot; 
 
 You don&#39;t question Jelena again, and the two of you begin to head towards [[the outskirts of town.]]
 
-&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="&quot;How long will the visit be?&quot;" tags="" position="702,4094" size="100,100">&quot;The visit shouldn&#39;t take long,&quot; Jelena answers. &quot;We&#39;ll be well out of Ved Fjellet by tomorrow at the latest.&quot; 
+&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="&quot;How long will the visit be?&quot;" tags="" position="702,4094" size="100,100">&quot;The visit shouldn&#39;t take long,&quot; Jelena answers. &quot;We&#39;ll be well out of Ved Fjellet by tomorrow at the latest.&quot; 
 
-You nod and you and Jelena move on to [[the outskirts of town.]]</tw-passagedata><tw-passagedata pid="54" name="the outskirts of town." tags="" position="899.3333333333334,4202" size="100,100">You and Jelena show up outside of a small house besides an icy bay. You don&#39;t think you&#39;ve ever seen so much snow and ice in your entire life. 
+You nod and you and Jelena move on to [[the outskirts of town.]]</tw-passagedata><tw-passagedata pid="52" name="the outskirts of town." tags="" position="899,4202" size="100,100">You and Jelena show up outside of a small house besides an icy bay. You don&#39;t think you&#39;ve ever seen so much snow and ice in your entire life. 
 
 Jelena approaches the house. &quot;C&#39;mon. Let&#39;s go inside.&quot; 
 
 [[You&#39;d rather take a moment to explore.|explore][$karma -=1]] 
 [[Follow Jelena.][$karma +=1]] 
-</tw-passagedata><tw-passagedata pid="55" name="explore" tags="" position="701.3333333333334,4302" size="100,100">&quot;I&#39;ll be right in,&quot; you tell her. &quot;I want to look around for a bit.&quot; 
+</tw-passagedata><tw-passagedata pid="53" name="explore" tags="" position="701,4302" size="100,100">&quot;I&#39;ll be right in,&quot; you tell her. &quot;I want to look around for a bit.&quot; 
 
 Jelena looks at you warily. &quot;Don&#39;t go too far.&quot; 
 
-[[&#39;&quot;I won&#39;t.&quot;&#39;]]</tw-passagedata><tw-passagedata pid="56" name="Follow Jelena." tags="" position="1100.6666666666667,4299.333333333333" size="100,100">You follow Jelena into the house where an older couple greets you. 
+[[&#39;&quot;I won&#39;t.&quot;&#39;]]</tw-passagedata><tw-passagedata pid="54" name="Follow Jelena." tags="" position="1100,4299" size="100,100">You follow Jelena into the house where an older couple greets you. 
 
 &quot;Jelena,&quot; the older woman rushes forward and envelops Jelena in a big hug. &quot;We didn&#39;t know if you&#39;d still have time to see us before you left.&quot; 
 
@@ -905,7 +1445,7 @@ Jelena looks at you warily. &quot;Don&#39;t go too far.&quot;
 Jelena turns towards you, &quot;This is Professor $name. They&#39;re from the Englene Institute, and they&#39;re here to study fantomet.&quot; 
 
 The woman smiles warmly at you, &quot;Hello Professor $name. My name is Olga, and this is my husband, Dan. Is there any way that we could [[help with your research?]]
-</tw-passagedata><tw-passagedata pid="57" name="&#39;&quot;I won&#39;t.&quot;&#39;" tags="" position="702,4465.333333333333" size="100,100">You wander around the property, and look for samples to study. After a few minutes of searching, you don&#39;t find anything of note. 
+</tw-passagedata><tw-passagedata pid="55" name="&#39;&quot;I won&#39;t.&quot;&#39;" tags="" position="702,4465" size="100,100">You wander around the property, and look for samples to study. After a few minutes of searching, you don&#39;t find anything of note. 
 
 You start walking back towards the house when you hear a distressed, high-pitched whining. There&#39;s a dog trapped out on the ice sheet. 
 
@@ -916,7 +1456,7 @@ The ice sheet is solid enough to hold your weight, but something dangerous could
 [[Run back to the house for help.]] 
 [[Try to save the dog.]] 
 
-</tw-passagedata><tw-passagedata pid="58" name="Run back to the house for help." tags="" position="698.6666666666667,4599.666666666667" size="100,100">If something is out there it&#39;s too dangerous to save the dog by yourself. You run back towards the house for help. 
+</tw-passagedata><tw-passagedata pid="56" name="Run back to the house for help." tags="" position="698,4599" size="100,100">If something is out there it&#39;s too dangerous to save the dog by yourself. You run back towards the house for help. 
 
 You burst in the front door of the house. 
 
@@ -931,7 +1471,7 @@ You nod, &quot;It was a black and white dog. It looked terrified.&quot;
 The older couple exchange a look. &quot;That would be Rakker,&quot; The woman says. &quot;He&#39;s ours. He&#39;s always getting himself into trouble, but he can handle himself.&quot; 
 
 [[Argue with them.][$karma -=1]] 
-[[Accept that they know better.][$karma +=1]] </tw-passagedata><tw-passagedata pid="59" name="Try to save the dog." tags="" position="500,4494" size="100,100">You have to save the dog. You try calling to the dog to get its attention. When that doesn&#39;t work, you run out onto the ice sheet and try to reach the dog quickly. But the dog sees you, and bolts in the opposite direction. 
+[[Accept that they know better.][$karma +=1]] </tw-passagedata><tw-passagedata pid="57" name="Try to save the dog." tags="" position="500,4494" size="100,100">You have to save the dog. You try calling to the dog to get its attention. When that doesn&#39;t work, you run out onto the ice sheet and try to reach the dog quickly. But the dog sees you, and bolts in the opposite direction. 
 
 You continue to chase it. &quot;Come here! It&#39;s okay, I&#39;m trying to help you!&quot; 
 
@@ -963,38 +1503,38 @@ The last thing you see is a thick wall of mist rushing towards you.
 [[...|death 1]]
 
 
-</tw-passagedata><tw-passagedata pid="60" name="death 1" tags="death" position="202,4499.666666666667" size="100,100">You disregarded Jelena&#39;s warnings and went too far north.
+</tw-passagedata><tw-passagedata pid="58" name="death 1" tags="death" position="202,4499" size="100,100">You disregarded Jelena&#39;s warnings and went too far north.
 
-&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Argue with them." tags="" position="501,4697.333333333333" size="100,100">&quot;You can&#39;t just leave your dog out there to get hurt!&quot; you protest. 
+&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="Argue with them." tags="" position="501,4697" size="100,100">&quot;You can&#39;t just leave your dog out there to get hurt!&quot; you protest. 
 
 &quot;The //Dimman// is kinder to animals than it is to us,&quot; the man speaks up. &quot;Rakker will be fine. There&#39;s no predators out there on the ice with him, only that deadly mist.&quot; 
 
 [[Accept that they know better.]] 
-[[&#39;&quot;I don&#39;t understand...&quot;&#39;]] </tw-passagedata><tw-passagedata pid="62" name="Accept that they know better." tags="" position="603,4994" size="100,100">&quot;As we were saying, Jelena, the //Dimman// is moving further into the southwest areas of the island. Right now it looks like the //Dimman// is close to enveloping the bay. If you two travel along the ice sheet you need to stay closer to shore. Stay away from the mouth of the bay,&quot; the man says. 
+[[&#39;&quot;I don&#39;t understand...&quot;&#39;]] </tw-passagedata><tw-passagedata pid="60" name="Accept that they know better." tags="" position="603,4994" size="100,100">&quot;As we were saying, Jelena, the //Dimman// is moving further into the southwest areas of the island. Right now it looks like the //Dimman// is close to enveloping the bay. If you two travel along the ice sheet you need to stay closer to shore. Stay away from the mouth of the bay,&quot; the man says. 
 
 [[&#39;&quot;Isn&#39;t the mist from the north?&quot;&#39;]] 
-[[&#39;&quot;Why travel on the ice sheet?&quot;&#39;]]</tw-passagedata><tw-passagedata pid="63" name="&#39;&quot;I don&#39;t understand...&quot;&#39;" tags="" position="404,4890" size="100,100">&quot;Animals have a better sense of these things,&quot; Jelena says. &quot;They know the //Dimman// better than we do, and that includes when it&#39;s about to roll in closer.&quot; 
+[[&#39;&quot;Why travel on the ice sheet?&quot;&#39;]]</tw-passagedata><tw-passagedata pid="61" name="&#39;&quot;I don&#39;t understand...&quot;&#39;" tags="" position="404,4890" size="100,100">&quot;Animals have a better sense of these things,&quot; Jelena says. &quot;They know the //Dimman// better than we do, and that includes when it&#39;s about to roll in closer.&quot; 
 
 &quot;Rakker will be fine,&quot; the older woman adds. &quot;He&#39;s gotten trapped behind the //Dimman// before and hasn&#39;t died. He&#39;s just nervous about it getting closer is all.&quot; 
 
-[[Accept that they know better.]] </tw-passagedata><tw-passagedata pid="64" name="&#39;&quot;Isn&#39;t the mist from the north?&quot;&#39;" tags="" position="803,4796" size="100,100">&quot;The //Dimman// is from the edge of the world,&quot; the woman says. &quot;It used to stay there year-round, and could only be found in the north. Using fantomet is [[what draws it south.|You have no further questions.]]&quot; 
+[[Accept that they know better.]] </tw-passagedata><tw-passagedata pid="62" name="&#39;&quot;Isn&#39;t the mist from the north?&quot;&#39;" tags="" position="803,4796" size="100,100">&quot;The //Dimman// is from the edge of the world,&quot; the woman says. &quot;It used to stay there year-round, and could only be found in the north. Using fantomet is [[what draws it south.|You have no further questions.]]&quot; 
 
-</tw-passagedata><tw-passagedata pid="65" name="&#39;&quot;Why travel on the ice sheet?&quot;&#39;" tags="" position="799.6666666666666,4998.666666666667" size="100,100">&quot;It&#39;s like a highway,&quot; Jelena explains. &quot;If we travel across the land it will take longer and there will be more obstacles. The ice sheet will help us get up north up before the middle of winter, which is when the //Dimman// spreads the farthest and [[there&#39;s the most storms.|You have no further questions.]]&quot; 
+</tw-passagedata><tw-passagedata pid="63" name="&#39;&quot;Why travel on the ice sheet?&quot;&#39;" tags="" position="799,4998" size="100,100">&quot;It&#39;s like a highway,&quot; Jelena explains. &quot;If we travel across the land it will take longer and there will be more obstacles. The ice sheet will help us get up north up before the middle of winter, which is when the //Dimman// spreads the farthest and [[there&#39;s the most storms.|You have no further questions.]]&quot; 
 
-</tw-passagedata><tw-passagedata pid="66" name="help with your research?" tags="" position="1100,4499" size="100,100">You consider asking Olga and Dan some questions... 
+</tw-passagedata><tw-passagedata pid="64" name="help with your research?" tags="" position="1100,4499" size="100,100">You consider asking Olga and Dan some questions... 
 
 [[The Dimman?|&#39;&quot;Isn&#39;t the mist from the north?&quot;&#39;][$karma +=1]] 
 [[fantomet?]] 
-[[Advice?][$karma +=1]] </tw-passagedata><tw-passagedata pid="67" name="Advice?" tags="" position="1302,4696" size="100,100">&quot;Listen to Jelena out there,&quot; Olga says. &quot;She knows her way around the wilderness and can find landmarks out there without any map or guide.&quot; 
+[[Advice?][$karma +=1]] </tw-passagedata><tw-passagedata pid="65" name="Advice?" tags="" position="1302,4696" size="100,100">&quot;Listen to Jelena out there,&quot; Olga says. &quot;She knows her way around the wilderness and can find landmarks out there without any map or guide.&quot; 
 
 &quot;And try to travel along the coastal section of the ice sheet,&quot; Dan adds. &quot;The //Dimman// is more present in the southwest communities of the island because of increased fantomet usage. We&#39;ve heard that many communities across the bay have had to migrate south this winter to avoid it.&quot; 
 
 [[&#39;&quot;Why travel on the ice sheet?&quot;&#39;]] 
-[[You have no further questions.]]</tw-passagedata><tw-passagedata pid="68" name="fantomet?" tags="" position="1001.3333333333334,4699.333333333334" size="100,100">&quot;Fantomet is a curse to the world,&quot; Olga sadly looks to her husband. &quot;Dan and I aren&#39;t from Ved Fjellet. Like so many others, we lived farther north. Increased fantomet usage around and off the island has caused too much change; the //Dimman// is not where it should be, and so many homes and ways of life are being lost. The world is no longer [[as we knew it to be.&quot;|You have no further questions.]]</tw-passagedata><tw-passagedata pid="69" name="You have no further questions." tags="" position="1002.3333333333333,5050" size="100,100">You and Jelena prepare to leave, and as you&#39;re walking out of the house Dan calls after the two of you: 
+[[You have no further questions.]]</tw-passagedata><tw-passagedata pid="66" name="fantomet?" tags="" position="1001,4699" size="100,100">&quot;Fantomet is a curse to the world,&quot; Olga sadly looks to her husband. &quot;Dan and I aren&#39;t from Ved Fjellet. Like so many others, we lived farther north. Increased fantomet usage around and off the island has caused too much change; the //Dimman// is not where it should be, and so many homes and ways of life are being lost. The world is no longer [[as we knew it to be.&quot;|You have no further questions.]]</tw-passagedata><tw-passagedata pid="67" name="You have no further questions." tags="" position="1002,5050" size="100,100">You and Jelena prepare to leave, and as you&#39;re walking out of the house Dan calls after the two of you: 
 
 &quot;Remember,&quot; he warns. &quot;Don&#39;t travel northwest along the ice sheet. Beware the //Dimman.//&quot; 
 
-You can only hope that you don&#39;t run into the //Dimman// [[on the icesheet.]] </tw-passagedata><tw-passagedata pid="70" name="on the icesheet." tags="" position="902,5195" size="100,100">You and Jelena are on the ice sheet. In the distance behind you, you can make out the mountains near Ved Fjellet. Ahead of you, you can faintly see the northern landmasses along the bay. 
+You can only hope that you don&#39;t run into the //Dimman// [[on the icesheet.]] </tw-passagedata><tw-passagedata pid="68" name="on the icesheet." tags="" position="902,5195" size="100,100">You and Jelena are on the ice sheet. In the distance behind you, you can make out the mountains near Ved Fjellet. Ahead of you, you can faintly see the northern landmasses along the bay. 
 
 It&#39;s foggier out now, though, and the sun is no longer directly overhead. 
 Jelena keeps walking ahead of you, faster than you are.
@@ -1005,11 +1545,11 @@ You&#39;re about to lose sight of her.
 &lt;&lt;if $inventory.indexOf(&quot;flashlight&quot;) != -1&gt;&gt;
 [[Try to use your flashlight.]]
 &lt;&lt;/if&gt;&gt;
-[[Try to run and catch up.]]</tw-passagedata><tw-passagedata pid="71" name="Ask her to slow down." tags="" position="701,5398" size="100,100">&quot;Jelena!&quot; You call out. Jelena&#39;s shadowy outline stops walking, and you think you see her turn around. She slowly emerges back into view. 
+[[Try to run and catch up.]]</tw-passagedata><tw-passagedata pid="69" name="Ask her to slow down." tags="" position="701,5398" size="100,100">&quot;Jelena!&quot; You call out. Jelena&#39;s shadowy outline stops walking, and you think you see her turn around. She slowly emerges back into view. 
 
 &quot;Sorry,&quot; Jelena appologizes. &quot;I forgot you&#39;re not used to travelling across this type of terrain.&quot; 
 
-You continue on, and Jelena [[matches her pace to yours.|you live]] </tw-passagedata><tw-passagedata pid="72" name="Try to use your flashlight." tags="" position="602,5235" size="100,100">You start to panic, and don&#39;t want Jelena to get to far ahead. Maybe using your flashlight could help? 
+You continue on, and Jelena [[matches her pace to yours.|you live]] </tw-passagedata><tw-passagedata pid="70" name="Try to use your flashlight." tags="" position="602,5235" size="100,100">You start to panic, and don&#39;t want Jelena to get to far ahead. Maybe using your flashlight could help? 
 
 You dig through your bag and pull out your fantomet-powered flashlight. 
 The second you turn it on you see Jelena&#39;s outline rushing towards you. 
@@ -1020,18 +1560,18 @@ Before you can react, you hear indistinct murmurs fill the air around you. The h
 
 The last thing you see is a wall of mist rushing towards you both. 
 
-[[---|death 2]]</tw-passagedata><tw-passagedata pid="73" name="Try to run and catch up." tags="" position="1204,5233" size="100,100">You try to run and catch up to Jelena, and realize too late that you&#39;re not at all used to running in such a snowy and icy environment. You feel your feet flying out from beneath you, and you painfuly land on the ice. 
+[[---|death 2]]</tw-passagedata><tw-passagedata pid="71" name="Try to run and catch up." tags="" position="1204,5233" size="100,100">You try to run and catch up to Jelena, and realize too late that you&#39;re not at all used to running in such a snowy and icy environment. You feel your feet flying out from beneath you, and you painfuly land on the ice. 
 
 Jelena hears your fall, and [[rushes back to help you.]]
 
-&lt;&lt;set $hasFallen to true&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="you live" tags="" position="901,5596" size="100,100">The two of you make it off the ice sheet as the sun is setting. 
+&lt;&lt;set $hasFallen to true&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="you live" tags="" position="901,5596" size="100,100">The two of you make it off the ice sheet as the sun is setting. 
 
 &quot;I know a place we can set up camp for tonight,&quot; Jelena says. &quot;It&#39;s not too far from here. We should make it there before it gets too dark.&quot; 
 
 You follow Jelena [[further into the unknown.|the camp]]
-</tw-passagedata><tw-passagedata pid="75" name="death 2" tags="death" position="198.66666666666666,5298.333333333333" size="100,100">Using your fantomet-powered flashlight drew the //Dimman// too close to the two of you.  
+</tw-passagedata><tw-passagedata pid="73" name="death 2" tags="death" position="198,5298" size="100,100">Using your fantomet-powered flashlight drew the //Dimman// too close to the two of you.  
 
-&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="rushes back to help you." tags="" position="1101,5400" size="100,100">&lt;&lt;if $karma &lt; -3&gt;&gt; 
+&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="rushes back to help you." tags="" position="1101,5400" size="100,100">&lt;&lt;if $karma &lt; -3&gt;&gt; 
 &quot;Idiot,&quot; she mutters under her breath. &quot;Of course a //fremmed// like you wouldn&#39;t know how to walk without injuring yourself.&quot; 
 
 Jelena looks at you, trying to assess the damage of your fall. &quot;Try not to get injured again in the future. Injuries out here could mean your death.&quot; 
@@ -1044,7 +1584,7 @@ You nod. &quot;I&#39;m fine to continue.&quot;
 
 &quot;I&#39;ll walk slower,&quot; Jelena says. &quot;I forgot you&#39;re not used to travelling across this type of terrain. In the future, let me know if you need help, or if you need time to catch up.&quot; 
 
-You continue on, and Jelena [[matches her pace to yours.|you live]]</tw-passagedata><tw-passagedata pid="77" name="the camp" tags="" position="901,5794" size="100,100">Jelena&#39;s choice of a campsite is within a forest, and is farther inland from the ice sheet. 
+You continue on, and Jelena [[matches her pace to yours.|you live]]</tw-passagedata><tw-passagedata pid="75" name="the camp" tags="" position="901,5794" size="100,100">Jelena&#39;s choice of a campsite is within a forest, and is farther inland from the ice sheet. 
 
 &quot;We&#39;re here,&quot; she says. &quot;Time to set up camp.&quot;
 
@@ -1053,7 +1593,7 @@ Jelena immediately begins sifting through your bags to prepare your make-shift c
 [[&#39;&quot;Where&#39;s here?&quot;&#39;]] 
 [[&#39;&quot;How long will we be here?&quot;&#39;]] 
 
-</tw-passagedata><tw-passagedata pid="78" name="&#39;&quot;Where&#39;s here?&quot;&#39;" tags="" position="699.3333333333334,5999" size="100,100">&quot;Here is home, until I decide that it isn&#39;t.&quot; Jelena says. &quot;We&#39;ll be here for tonight, and maybe tomorrow. I need to figure out how much the landscape has changed since I&#39;ve been here: where the best food sources are, and which areas are still off-limits.&quot; 
+</tw-passagedata><tw-passagedata pid="76" name="&#39;&quot;Where&#39;s here?&quot;&#39;" tags="" position="699,5999" size="100,100">&quot;Here is home, until I decide that it isn&#39;t.&quot; Jelena says. &quot;We&#39;ll be here for tonight, and maybe tomorrow. I need to figure out how much the landscape has changed since I&#39;ve been here: where the best food sources are, and which areas are still off-limits.&quot; 
 
 &quot;You&#39;ve been here before?&quot; 
 
@@ -1079,7 +1619,7 @@ Jelena immediately begins sifting through your bags to prepare your make-shift c
 
 &lt;&lt;/if&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="79" name="&#39;&quot;How long will we be here?&quot;&#39;" tags="" position="1102,5999.333333333333" size="100,100">&quot;I haven&#39;t figured that out yet,&quot; Jelena tells you. &quot;I need to figure out the next safest path for use to take, and I don&#39;t know how much the landscape has changed around here since my last trip.&quot; 
+</tw-passagedata><tw-passagedata pid="77" name="&#39;&quot;How long will we be here?&quot;&#39;" tags="" position="1102,5999" size="100,100">&quot;I haven&#39;t figured that out yet,&quot; Jelena tells you. &quot;I need to figure out the next safest path for use to take, and I don&#39;t know how much the landscape has changed around here since my last trip.&quot; 
  
 &lt;&lt;if $karma &lt; -4&gt;&gt; 
 
@@ -1093,7 +1633,7 @@ Jelena immediately begins sifting through your bags to prepare your make-shift c
 
 &lt;&lt;/if&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="80" name="&#39;&quot;We shouldn&#39;t have to scope the area if you know it.&quot;&#39;" tags="" position="502,6193" size="100,100">Jelena stiffens at your comment. 
+</tw-passagedata><tw-passagedata pid="78" name="&#39;&quot;We shouldn&#39;t have to scope the area if you know it.&quot;&#39;" tags="" position="502,6193" size="100,100">Jelena stiffens at your comment. 
 
 &quot;It&#39;s been a while since I&#39;ve been here, but I can assure you that I know this area better than I know myself. I know every landmark, plant, and animal from this region,&quot; Jelena says softly. &quot;My main concerns are the //Dimman//. It&#39;s too uncertain to track, and I won&#39;t be careless with either of our lives on this trip.&quot; 
 
@@ -1102,7 +1642,7 @@ Before you can think to say anything else, Jelena continues speaking.
 &quot;We have a long day ahead of us tomorrow,&quot; she says. &quot;The sooner we get to sleep, the better.&quot; 
 
 [[All you do is nod.|The attack]]
-&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="81" name="&#39;&quot;You&#39;re clearly inexperienced...&quot;&#39;" tags="" position="702,6198" size="100,100">Your blood begins to boil.
+&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="79" name="&#39;&quot;You&#39;re clearly inexperienced...&quot;&#39;" tags="" position="702,6198" size="100,100">Your blood begins to boil.
 &quot;You&#39;re clearly inexperienced!&quot; You shout. &quot;You didn&#39;t even scope out the territory properly before meeting me! You should have had everything done weeks in advance. You&#39;re no professional. I&#39;m amazed that Englene even hired you.&quot; 
 
 Jelena stiffens and stops going through the bags. 
@@ -1115,18 +1655,18 @@ Before you can think to say anything else, Jelena continues speaking.
 
 [[All you do is nod.|The attack]]
 
-&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="Apologize, and move on." tags="" position="902,6195" size="100,100">&quot;I&#39;m sorry,&quot; You apologize. &quot;I won&#39;t question you anymore.&quot; 
+&lt;&lt;set $hasArgued = true&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="Apologize, and move on." tags="" position="902,6195" size="100,100">&quot;I&#39;m sorry,&quot; You apologize. &quot;I won&#39;t question you anymore.&quot; 
 
 Jelena nods. You //think// you&#39;re not imaging that she looks a little grateful. This whole journey is stressful for both of you.
 
 &quot;I&#39;m going to set up camp,&quot; She says. &quot;We&#39;ve got a long day ahead of us tomorrow.&quot; 
 
 [[You nod.|The attack]]
-</tw-passagedata><tw-passagedata pid="83" name="&#39;&quot;Changed?&quot;&#39;" tags="" position="1306,6197" size="100,100">&quot;Things aren&#39;t what they used to be,&quot; Jelena sighs. &quot;The //Dimman// has caused a lot of displacement. The land isn&#39;t managed the same way because of that. And some places are constantly covered by the //Dimman// regardless of the season. [[Everything is uncertain, now.&quot;|The attack]]</tw-passagedata><tw-passagedata pid="84" name="Nod." tags="" position="1102,6194" size="100,100">Jelena is your biggest lifeline on this trip. You need to trust her. 
+</tw-passagedata><tw-passagedata pid="81" name="&#39;&quot;Changed?&quot;&#39;" tags="" position="1306,6197" size="100,100">&quot;Things aren&#39;t what they used to be,&quot; Jelena sighs. &quot;The //Dimman// has caused a lot of displacement. The land isn&#39;t managed the same way because of that. And some places are constantly covered by the //Dimman// regardless of the season. [[Everything is uncertain, now.&quot;|The attack]]</tw-passagedata><tw-passagedata pid="82" name="Nod." tags="" position="1102,6194" size="100,100">Jelena is your biggest lifeline on this trip. You need to trust her. 
 
 &quot;We have a long day ahead of us tomorrow,&quot; Jelena says. &quot;The sooner we get to sleep, the better.&quot; 
 
-[[You nod again.|The attack]]</tw-passagedata><tw-passagedata pid="85" name="The attack" tags="" position="900.6666666666666,6401" size="100,100">You and Jelena finish setting up your camp, and the two of you settle in front of a fire that Jelena started. 
+[[You nod again.|The attack]]</tw-passagedata><tw-passagedata pid="83" name="The attack" tags="" position="900,6401" size="100,100">You and Jelena finish setting up your camp, and the two of you settle in front of a fire that Jelena started. 
 
 You decide to record some notes and details of your journey so far. 
 
@@ -1166,7 +1706,7 @@ But you fumble with your phone and feel teeth sink into your leg. You scream.
 
 
 
-</tw-passagedata><tw-passagedata pid="86" name="in the tree" tags="" position="902.3333333333334,6536" size="100,100">“We’re sleeping up here,” she says. 
+</tw-passagedata><tw-passagedata pid="84" name="in the tree" tags="" position="902,6536" size="100,100">“We’re sleeping up here,” she says. 
 
 &quot;Can&#39;t they climb trees?&quot; you pant. 
 
@@ -1196,9 +1736,9 @@ You&#39;re so exhausted that you drift off to sleep.
 
 
 
-</tw-passagedata><tw-passagedata pid="87" name="death 3" tags="death" position="200,6399.666666666667" size="100,100">Your relationship with Jelena was not solid enough to immediately listen to her advice.
+</tw-passagedata><tw-passagedata pid="85" name="death 3" tags="death" position="200,6399" size="100,100">You did not regard Jelena well enough to immediately heed her advice.
 
-&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="The next morning." tags="" position="901.6666666666666,6702.333333333333" size="100,100">You wake up the next morning, and your entire body aches. 
+&lt;&lt;display &quot;death&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="86" name="The next morning." tags="" position="901,6702" size="100,100">You wake up the next morning, and your entire body aches. 
 &lt;&lt;if $hasFallen&gt;&gt; 
 You shouldn&#39;t have run on the ice sheet the other day. You tentatively try to check the injuries you sustained yesterday. 
 &lt;&lt;else&gt;&gt; 
@@ -1217,24 +1757,24 @@ You look down at the camp, and there&#39;s surprisingly little damage to what wa
 &quot;We should get moving soon,&quot; Jelena says. &quot;The sooner this trip is completed, the better.&quot; 
 
 [[&#39;&quot;What happened to scoping out the area?&quot;&#39;][$karma -=1]]
-[[&#39;&quot;I agree.&quot;&#39;][$karma +=1]]</tw-passagedata><tw-passagedata pid="89" name="&#39;&quot;What happened to scoping out the area?&quot;&#39;" tags="" position="701.3333333333334,6800.666666666667" size="100,100">&quot;If the //bjørnulves// are so far south, that can only mean the //Dimman// is rolling in farther and earlier than it usually does,&quot; Jelena says. &quot;We have less time than I originally anticipated, so we need to move quicker.&quot; 
+[[&#39;&quot;I agree.&quot;&#39;][$karma +=1]]</tw-passagedata><tw-passagedata pid="87" name="&#39;&quot;What happened to scoping out the area?&quot;&#39;" tags="" position="701,6800" size="100,100">&quot;If the //bjørnulves// are so far south, that can only mean the //Dimman// is rolling in farther and earlier than it usually does,&quot; Jelena says. &quot;We have less time than I originally anticipated, so we need to move quicker.&quot; 
 
 [[You agree with Jelena&#39;s judgement|&#39;&quot;I agree.&quot;&#39;]] 
-[[Question her judgement.]] </tw-passagedata><tw-passagedata pid="90" name="&#39;&quot;I agree.&quot;&#39;" tags="" position="1097,6803" size="100,100">You agree with Jelena&#39;s judgement, &quot;You&#39;re right. It&#39;s getting dangerous out here. I wouldn&#39;t want anything bad to happen to either of us.&quot; 
+[[Question her judgement.]] </tw-passagedata><tw-passagedata pid="88" name="&#39;&quot;I agree.&quot;&#39;" tags="" position="1097,6803" size="100,100">You agree with Jelena&#39;s judgement, &quot;You&#39;re right. It&#39;s getting dangerous out here. I wouldn&#39;t want anything bad to happen to either of us.&quot; 
 &lt;&lt;if $hasArgued&gt;&gt;
 Jelena smiles, &quot;I&#39;m glad we can finally agree on something.&quot; 
 &lt;&lt;else&gt;&gt; 
 Jelena nods appreciatively. &quot;I&#39;m glad you agree.&quot; 
 &lt;&lt;/if&gt;&gt; 
 [[Let&#39;s get out of this tree.]]
-</tw-passagedata><tw-passagedata pid="91" name="Question her judgement." tags="" position="500.6666666666667,6901.666666666667" size="100,100">&quot;Like I said last night,&quot; Jelena says, &quot;this trip is getting increasingly dangerous. It was already dangerous because of the //Dimman//, but there are //bjørnulves// in the area now, too. Staying out here longer isn&#39;t an option anymore.&quot; 
+</tw-passagedata><tw-passagedata pid="89" name="Question her judgement." tags="" position="500,6901" size="100,100">&quot;Like I said last night,&quot; Jelena says, &quot;this trip is getting increasingly dangerous. It was already dangerous because of the //Dimman//, but there are //bjørnulves// in the area now, too. Staying out here longer isn&#39;t an option anymore.&quot; 
 
 &quot;But what about safety-&quot; 
 
 &quot;If you&#39;re concerned about safety, then we should turn back.&quot; 
 
 [[Go back to Ved Fjellet.|You fail]]
-[[&quot;Turning back is not an option&quot;|Let&#39;s get out of this tree.]]</tw-passagedata><tw-passagedata pid="92" name="Let&#39;s get out of this tree." tags="" position="900,6996" size="100,100">You and Jelena climb out of the tree and pack up your belongings. 
+[[&quot;Turning back is not an option&quot;|Let&#39;s get out of this tree.]]</tw-passagedata><tw-passagedata pid="90" name="Let&#39;s get out of this tree." tags="" position="900,6996" size="100,100">You and Jelena climb out of the tree and pack up your belongings. 
 
 &quot;Where are we going now?&quot; you ask Jelena. 
 
@@ -1243,17 +1783,19 @@ Jelena slings her bag over her shoulder.
 &quot;There&#39;s an abandoned village not too far from here,&quot; she says. &quot;It&#39;s near a sizeable fantomet deposit.&quot; 
 
 [[Let&#39;s go.|The village]] 
-[[&#39;&quot;How long will it take to get there?&quot;&#39;]]</tw-passagedata><tw-passagedata pid="93" name="You fail" tags="" position="200.33333333333334,6900" size="100,100">You gave up on finding answers. You failed your mission; the Englene Institute pulled your funding and you were never given a research expedition again. No one else tried to study fantomet and Phantomfelt.
+[[&#39;&quot;How long will it take to get there?&quot;&#39;]]</tw-passagedata><tw-passagedata pid="91" name="You fail" tags="" position="200,6900" size="100,100">You gave up on finding answers. You failed. 
+
+The Englene Institute pulled your funding and you were never given a research expedition again. No one else tried to study fantomet and Phantomfelt.
 
 Use the sidebar to try again.
 [[You&#39;re done. See the impact of your choices.|the world continues]]
 
-</tw-passagedata><tw-passagedata pid="94" name="&#39;&quot;How long will it take to get there?&quot;&#39;" tags="" position="1102.3333333333333,7103.666666666667" size="100,100">&quot;We&#39;ll be able to reach the village by nightfall,&quot; Jelena answers. &quot;I think we should rest there overnight and get the samples in the morning before heading back.&quot;
+</tw-passagedata><tw-passagedata pid="92" name="&#39;&quot;How long will it take to get there?&quot;&#39;" tags="" position="1102,7103" size="100,100">&quot;We&#39;ll be able to reach the village by nightfall,&quot; Jelena answers. &quot;I think we should rest there overnight and get the samples in the morning before heading back.&quot;
 
 [[&quot;Let&#39;s go.&quot;|The village]]
-</tw-passagedata><tw-passagedata pid="95" name="The village" tags="" position="900.3333333333334,7205.333333333333" size="100,100">You reach the village by nightfall. 
+</tw-passagedata><tw-passagedata pid="93" name="The village" tags="" position="900,7205" size="100,100">You reach the village by nightfall. 
 
-Jelena quickly walks up to one of the dilapidated homes and motions for you to enter it. [[You follow her into the house.|The talk]]</tw-passagedata><tw-passagedata pid="96" name="The talk" tags="" position="900,7396.666666666667" size="100,100">You both set up &#39;camp&#39; for the night inside the abandoned house silently. Jelena places candles strategically around the room to provide some light in the pitch-black room you&#39;re staying in. 
+Jelena quickly walks up to one of the dilapidated homes and motions for you to enter it. [[You follow her into the house.|The talk]]</tw-passagedata><tw-passagedata pid="94" name="The talk" tags="" position="900,7396" size="100,100">You both set up &#39;camp&#39; for the night inside the abandoned house silently. Jelena places candles strategically around the room to provide some light in the pitch-black room you&#39;re staying in. 
 
 After lighting the candles, Jelena pulls a tattered book out of her bag. You catch its title: //The Lost City of Ondkraft.// 
 &lt;&lt;if $hasHeard&gt;&gt; 
@@ -1283,7 +1825,7 @@ Jelena looks at you sadly. &quot;I know it&#39;s true,&quot; she says. &quot;The
 
 
 
-</tw-passagedata><tw-passagedata pid="97" name="&quot;Where are you from?&quot;" tags="" position="502,7800.666666666667" size="100,100">You&#39;re curious about Jelena&#39;s past. 
+</tw-passagedata><tw-passagedata pid="95" name="&quot;Where are you from?&quot;" tags="" position="502,7800" size="100,100">You&#39;re curious about Jelena&#39;s past. 
 
 &quot;Where are you from?&quot; You finally ask. 
 &lt;&lt;if $karma &gt; 4&gt;&gt;
@@ -1302,7 +1844,7 @@ Jelena pauses, &quot;We couldn&#39;t stay. We wanted to, but we just couldn&#39;
 &quot;But where?&quot; You push. 
 &lt;&lt;/if&gt;&gt;
 &quot;We have a long trip ahead of us tomorrow. We should get some rest.&quot; Jelena blows out the candles and eventually you both [[fall asleep.|finding fantomet]]
-</tw-passagedata><tw-passagedata pid="98" name="&quot;What do you mean?&quot;" tags="" position="902,7595" size="100,100">&quot;The Førstesegs used fantomet and destroyed their world, their way of life, and their people. It&#39;s no different than what is happening now: so many people have died, towns have disappeared from the map, entire regions have been engulfed by the //Dimman//, and our way of life has been upended. We can&#39;t hunt, we can&#39;t travel, we can&#39;t live,&quot; Jelena says. 
+</tw-passagedata><tw-passagedata pid="96" name="&quot;What do you mean?&quot;" tags="" position="902,7595" size="100,100">&quot;The Førstesegs used fantomet and destroyed their world, their way of life, and their people. It&#39;s no different than what is happening now: so many people have died, towns have disappeared from the map, entire regions have been engulfed by the //Dimman//, and our way of life has been upended. We can&#39;t hunt, we can&#39;t travel, we can&#39;t live,&quot; Jelena says. 
 
 You let that sink in. 
 
@@ -1313,7 +1855,7 @@ Jelena closes her book and hands it to you. &quot;I want you to have this. You s
 
 
 
-</tw-passagedata><tw-passagedata pid="99" name="Let Jelena read." tags="" position="1302,7796" size="100,100">You let Jelena go back to her book and eventually [[fall asleep.|finding fantomet]]</tw-passagedata><tw-passagedata pid="100" name="finding fantomet" tags="" position="900.3333333333334,8002" size="100,100">You accomplish your journey, finding an old reservoir of unclaimed fantomet for you to study. You also grab samples from the area.
+</tw-passagedata><tw-passagedata pid="97" name="Let Jelena read." tags="" position="1302,7796" size="100,100">You let Jelena go back to her book and eventually [[fall asleep.|finding fantomet]]</tw-passagedata><tw-passagedata pid="98" name="finding fantomet" tags="" position="900,8002" size="100,100">You accomplish your journey, finding an old reservoir of unclaimed fantomet for you to study. You also grab samples from the area.
 
 Before you head back though, Jelena asks you a question.
 
@@ -1323,16 +1865,16 @@ Before you head back though, Jelena asks you a question.
 [[&#39;&quot;I won&#39;t let history repeat itself.&quot;&#39;|ending][$karma += 3]]
 [[&#39;&quot;Do you know of any local experts on fantomet?&quot;&#39;|ending][$karma += 5]]
 
-</tw-passagedata><tw-passagedata pid="101" name="Accept the gift." tags="" position="700,7701" size="100,100">&quot;Thank you, Jelena,&quot; you say. &quot;I promise I&#39;ll read it.&quot; 
+</tw-passagedata><tw-passagedata pid="99" name="Accept the gift." tags="" position="700,7701" size="100,100">&quot;Thank you, Jelena,&quot; you say. &quot;I promise I&#39;ll read it.&quot; 
 
 Jelena nods. &quot;Good. I hope you learn a lot from it.&quot; 
 
 Jelena blows the candles out in the room, and eventually you both [[fall asleep.|finding fantomet]]
-</tw-passagedata><tw-passagedata pid="102" name="Refuse it." tags="" position="1100.6666666666667,7702.999999999999" size="100,100">&quot;I can&#39;t take your book,&quot; you say handing it back to Jelena. 
+</tw-passagedata><tw-passagedata pid="100" name="Refuse it." tags="" position="1100,7702" size="100,100">&quot;I can&#39;t take your book,&quot; you say handing it back to Jelena. 
 
 Jelena takes it back and puts it in her bag. &quot;That&#39;s a shame. You could have learned from it.&quot; 
 
-You&#39;re too tired to argue, and you eventually [[fall asleep.|finding fantomet]]</tw-passagedata><tw-passagedata pid="103" name="Your questions 2" tags="" position="902,1397" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $questions2 == 0&gt;&gt;
+You&#39;re too tired to argue, and you eventually [[fall asleep.|finding fantomet]]</tw-passagedata><tw-passagedata pid="101" name="Your questions 2" tags="" position="902,1397" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $questions2 == 0&gt;&gt;
 &lt;&lt;actions
 [[&#39;&quot;What do they stock?&quot;&#39;|stock?][$questions2 += 1]]
 [[&#39;&quot;Where&#39;s my guide?&quot;&#39;|guide?][$questions2 += 1]]&gt;&gt;
@@ -1355,11 +1897,24 @@ You&#39;re too tired to argue, and you eventually [[fall asleep.|finding fantome
 [[You have no further questions and thank Oskar.-&gt;Thanks, Oskar.]]&gt;&gt;
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="Map" tags="" position="499,300" size="100,100">&lt;&lt;if $hasRegionMap&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Map" tags="" position="297,298" size="100,100">&lt;html&gt;
+&lt;button onclick=&quot;toggleHidden(&#39;map_world&#39;)&quot;&gt;World Map&lt;/button&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/map_world.png&quot; class=&quot;hidden&quot; id=&quot;map_world&quot;&gt;
+&lt;script&gt;function toggleHidden(id) {
+    let element = document.getElementById(id);
+  	element.classList.toggle(&quot;hidden&quot;);
+}&lt;/script&gt;
+&lt;/html&gt;
+&lt;&lt;if $inventory.indexOf(&quot;island map&quot;) != -1&gt;&gt;
+&lt;html&gt;
+&lt;button onclick=&quot;toggleHidden(&#39;map_island&#39;)&quot;&gt;Island Map&lt;/button&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/BraeJe-Garcia/TEK-CC_F19/master/images/map_island.png&quot; class=&quot;hidden&quot; id=&quot;map_island&quot;&gt;
 
-&lt;&lt;endif&gt;&gt;
+&lt;/html&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;back&gt;&gt;
 
-&lt;&lt;back&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="guide-doubt2" tags="" position="498.33333333333337,2799.6666666666665" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
+</tw-passagedata><tw-passagedata pid="103" name="guide-doubt2" tags="" position="499,2797" size="100,100">You look Jelena up and down. Judging by her face, she&#39;s much younger than you expected. 
 
 &quot;You&#39;re really young,&quot; You comment. &quot;Are you sure you can handle things out there? I need a guide with a lot of experience.&quot; 
 
@@ -1370,16 +1925,16 @@ The store was puny. You could maybe lose a cat in here, much less a person.
 [[You wait.]] 
 [[&quot;Actually where&#39;s the bathroom?&quot;]] 
 
-&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="good team2" tags="" position="700.0000000000001,2801.333333333333" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
+&lt;&lt;set $hasQuestioned to true&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="good team2" tags="" position="696,2791" size="100,100">&quot;It&#39;s nice to meet you, Jelena. I hope we can work well together.&quot; 
 
 &quot;Remember that what I say goes,&quot; she tells you. &quot;You do; we live.&quot; She doesn&#39;t give you a chance to respond. &quot;I&#39;ll go get what we need. You stay here and don&#39;t get lost.&quot; 
 
 The store was puny. You could maybe lose a cat in here, much less a person.
 
 [[You wait.]] 
-[[&quot;Actually where&#39;s the bathroom?&quot;]] </tw-passagedata><tw-passagedata pid="107" name="interrupted" tags="" position="601.6666666666666,2599.166666666667" size="100,100">You are interrupted by the shop door opening, a figure tromping in. Clad in a bulky fur coat and a matching hat, it is difficult to see a person underneath, especially as even the lower half of their face is covered by a thick mask. 
+[[&quot;Actually where&#39;s the bathroom?&quot;]] </tw-passagedata><tw-passagedata pid="105" name="interrupted" tags="" position="601,2599" size="100,100">You are interrupted by the shop door opening as a figure tromps in. Clad in a bulky fur coat and a matching hat, it is difficult to see a person underneath, especially as even the lower half of their face is covered by a thick mask. 
 
-The stranger looks at you and the supplies you were considering buying. They unzip their jacket, throwing it onto the rack and tugging their mask down. Underneath it all is a woman of average height and build. 
+The stranger looks at you and the supplies you were considering buying. They unzip their jacket, throwing it onto the rack as they tug their mask down. Underneath it all is a woman of average height and build. 
 
 &quot;Are you Professor $name?&quot; she demands of you.
 
@@ -1399,13 +1954,16 @@ The sheer force of her personality has you complying. In hindsight, trying to bu
 
 Still...//this// was your guide?
 
-[[&#39;&quot;And you&#39;re qualified?&quot;&#39;|guide-doubt2][$karma -= 1]]
-[[Put your best foot forward.|good team2][$karma += 1]]</tw-passagedata><tw-passagedata pid="108" name="death" tags="death" position="101.66666666666663,4301.666666666667" size="100,100">@@.song;Beware the Dimman
+[[&quot;And you&#39;re qualified?&quot;|guide-doubt2][$karma -= 1]]
+[[Put your best foot forward.|good team2][$karma += 1]]
+
+&lt;&lt;set $hasMoney to false&gt;&gt;
+&lt;&lt;if $people.indexOf(&quot;Jelena&quot;) == -1&gt;&gt;&lt;&lt;set $people.push(&quot;Jelena&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="death" tags="death" position="101,4301" size="100,100">@@.song;Beware the Dimman
 Wander into its veil
 Your last dawn
-So ends your tale...@@</tw-passagedata><tw-passagedata pid="109" name="the world continues" tags="end" position="301.99999999999994,8101.666666666668" size="100,100">You live a long life, and die knowing your children&#39;s children won&#39;t be able to.
+So ends your tale...@@</tw-passagedata><tw-passagedata pid="107" name="the world continues" tags="end" position="301,8101" size="100,100">You live a long life, and die knowing your children&#39;s children won&#39;t be able to.
 
-Fantomet&#39;s use became widespread. It was an energy source, but no one seemed to care that the energy they received was burning the candle of humanity. The mist had encroached to include almost half the world, and you saw the projections of scientists, your successors. Humanity approached a tipping point, and you die with no hope of them turning back in time.</tw-passagedata><tw-passagedata pid="110" name="ending" tags="end" position="900.3333333333334,8202" size="100,100">You dedicate your life to fighting for the use of clean energy sources. Fantomet is not one of them, but it is so profitable and easy. The fight is that much harder. 
+Fantomet&#39;s use became widespread. It was an energy source, but no one seemed to care that the energy they received was burning the candle of humanity. The mist had encroached to include almost half the world. You saw the projections of scientists, your successors. Humanity was approaching a point of no return, and you die without hope that they could turn back in time.</tw-passagedata><tw-passagedata pid="108" name="ending" tags="end" position="900,8202" size="100,100">You dedicate your life to fighting for the use of clean energy sources. Fantomet is not one of them, but it is so profitable and easy. The fight is that much harder. 
 
 &lt;&lt;if $karma &gt; 8&gt;&gt;
 You form community research groups with locals, collaborate with and learn from them, work to try and convince the continents that this is real and this is not sustainable.
@@ -1415,8 +1973,44 @@ You report your findings to the Englene Institute, but you do not stop there. Yo
 
 Jelena&#39;s brother grows up to be a researcher like you. You help spread awareness and lobby politicians—but it still seems like it&#39;s not enough.
 
-When you die, you leave with the hope that your children&#39;s children will have grandchildren that can still walk the world.</tw-passagedata><tw-passagedata pid="111" name="report" tags="end" position="602,8202" size="100,100">The Englene Institute received your findings, but could not turn the world from the path it was on. 
-&lt;&lt;display &quot;the world continues&quot;&gt;&gt;</tw-passagedata></tw-storydata>
+When you die, you leave with the hope that your children&#39;s children will have grandchildren that can still walk the world.</tw-passagedata><tw-passagedata pid="109" name="report" tags="end" position="602,8202" size="100,100">The Englene Institute received your findings, but could not turn the world from the path it was on. 
+&lt;&lt;display &quot;the world continues&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="Terms, Places, and People" tags="" position="502,302" size="100,100">&lt;&lt;if $people.indexOf(&quot;Anja&quot;) != -1&gt;&gt;*Anja’s
+**name of trading post in Ved Fjellet; shares name with its owner&lt;&lt;/if&gt;&gt;&lt;&lt;if $terms.indexOf(&quot;bjørnulves&quot;) != -1&gt;&gt;
+*bjørnulves
+**“bear-wolves” native to Grenseøya
+**thrive in the Dimman and are thus more common in Phantomfelt than Sørfelt&lt;&lt;/if&gt;&gt;
+*fantomet
+**the energy source you are researching&lt;&lt;if $terms.indexOf(&quot;fremmed&quot;) != -1&gt;&gt;
+*fremmed 
+**Grenseøya’s word for “stranger” or “traveler”&lt;&lt;/if&gt;&gt;&lt;&lt;if $terms.indexOf(&quot;Førstesegs&quot;) != -1&gt;&gt;
+*Førstesegs
+**the first people whose home was Phantomfelt
+**their capital was Ondkraft&lt;&lt;/if&gt;&gt;
+*Grenseøya
+**the island most of the story takes place in&lt;&lt;if $people.indexOf(&quot;Jelena&quot;) != -1&gt;&gt;
+*Jelena 
+**the guide hired to help you&lt;&lt;/if&gt;&gt;&lt;&lt;if $places.indexOf(&quot;Førstesegs&quot;) != -1&gt;&gt;
+*Ondkraft
+**the lost city of the Førstesegs in Phantomfelt&lt;&lt;/if&gt;&gt;&lt;&lt;if $people.indexOf(&quot;Oskar&quot;) != -1&gt;&gt;
+*Oskar
+**a local from Ved Fjellet that volunteered to meet you at the landing field and accompany you into town&lt;&lt;/if&gt;&gt;
+*Phantomfelt 
+**the mysterious northern region of Grenseøya
+*Sørfelt 
+**the southern region of Grenseøya
+*The mist &lt;&lt;if $heardDimman&gt;&gt; or Dimman&lt;&lt;/if&gt;&gt;
+**known to you as the mist that borders the world
+**Grenseøya has the world&#39;s closest settlements to the mist
+*tomet
+**the world’s currency
+*Ved Fjellet [ved fjellet]
+**the major town in Sørfelt&lt;&lt;if $people.length &gt; 0&gt;&gt;
+**home to &lt;&lt;nobr&gt;&gt;
+&lt;&lt;for _i to 0; _i lt $people.length; _i ++&gt;&gt;
+		&lt;&lt;print $people[_i]&gt;&gt;, 
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="\\s"===e?"\\S":e.replace(/^\[/,"[^"),r="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",n=r.replace("\\-",""),a=function(){return"("+r+"+)\\(([^\\)\\|\\n]+)\\):|("+r+"+):([^;\\|\\n]+);|((?:\\."+r+"+)+);|((?:#"+r+"+)+);"}();return Object.freeze({space:e,spaceNoTerminator:"[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:t,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:r,anyLetterStrict:n,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:a,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){!function(e){if(e&&e.prototype&&null==e.prototype.firstElementChild){var t=Node.ELEMENT_NODE;Object.defineProperty(e.prototype,"firstElementChild",{get:function(){for(var e=this.childNodes,r=0;r<e.length;++r){var n=e[r];if(n.nodeType===t)return n}return null}})}}(window.Node||window.Element)}(),function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=e&&function(){try{var e=document.createElement("audio").play();return e.catch(function(){}),e instanceof Promise}catch(e){}return!1}(),r=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),n=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),a=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),i=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),o=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),s=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,audioPromise:t,fileAPI:r,geolocation:n,mutationObserver:a,performance:i,touch:o,transitionEndEvent:s})}(),Visibility=function(){function e(){return Boolean(r&&document[r.hiddenProperty])}function t(){return r&&document[r.stateProperty]||"visible"}var r=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return null}();return Object.freeze(Object.defineProperties({},{isHidden:{value:e},state:{value:t},hiddenProperty:{value:r.hiddenProperty},stateProperty:{value:r.stateProperty},changeEvent:{value:r.changeEvent}}))}(),_ref3=function(){function e(t){if("object"!==(void 0===t?"undefined":_typeof(t))||null===t)return t;if(t instanceof String)return String(t);if(t instanceof Number)return Number(t);if(t instanceof Boolean)return Boolean(t);if("function"==typeof t.clone)return t.clone(!0);if(t.nodeType&&"function"==typeof t.cloneNode)return t.cloneNode(!0);var r=void 0;return t instanceof Array?r=new Array(t.length):t instanceof Date?r=new Date(t.getTime()):t instanceof Map?(r=new Map,t.forEach(function(t,n){return r.set(n,e(t))})):t instanceof RegExp?r=new RegExp(t):t instanceof Set?(r=new Set,t.forEach(function(t){return r.add(e(t))})):r=Object.create(Object.getPrototypeOf(t)),Object.keys(t).forEach(function(n){return r[n]=e(t[n])}),r}function t(e){for(var t=document.createDocumentFragment(),r=document.createElement("p"),n=void 0;null!==(n=e.firstChild);){if(n.nodeType===Node.ELEMENT_NODE){switch(n.nodeName.toUpperCase()){case"BR":if(null!==n.nextSibling&&n.nextSibling.nodeType===Node.ELEMENT_NODE&&"BR"===n.nextSibling.nodeName.toUpperCase()){e.removeChild(n.nextSibling),e.removeChild(n),t.appendChild(r),r=document.createElement("p");continue}if(!r.hasChildNodes()){e.removeChild(n);continue}break;case"ADDRESS":case"ARTICLE":case"ASIDE":case"BLOCKQUOTE":case"CENTER":case"DIV":case"DL":case"FIGURE":case"FOOTER":case"FORM":case"H1":case"H2":case"H3":case"H4":case"H5":case"H6":case"HEADER":case"HR":case"MAIN":case"NAV":case"OL":case"P":case"PRE":case"SECTION":case"TABLE":case"UL":r.hasChildNodes()&&(t.appendChild(r),r=document.createElement("p")),t.appendChild(n);continue}}r.appendChild(n)}r.hasChildNodes()&&t.appendChild(r),e.appendChild(t)}function r(){try{return document.activeElement||null}catch(e){return null}}function n(e,t,r){var n="object"===(void 0===e?"undefined":_typeof(e))?e:document.getElementById(e);if(null==n)return null;var a=Array.isArray(t)?t:[t];jQuery(n).empty();for(var i=0,o=a.length;i<o;++i)if(Story.has(a[i]))return new Wikifier(n,Story.get(a[i]).processText().trim()),n;if(null!=r){var s=String(r).trim();""!==s&&new Wikifier(n,s)}return n}function a(e,t,r){var n=jQuery(document.createElement("div")),a=jQuery(document.createElement("button")),i=jQuery(document.createElement("pre")),o=L10n.get("errorTitle")+": "+(t||"unknown error");return a.addClass("error-toggle").ariaClick({label:L10n.get("errorToggle")},function(){a.hasClass("enabled")?(a.removeClass("enabled"),i.attr({"aria-hidden":!0,hidden:"hidden"})):(a.addClass("enabled"),i.removeAttr("aria-hidden hidden"))}).appendTo(n),jQuery(document.createElement("span")).addClass("error").text(o).appendTo(n),jQuery(document.createElement("code")).text(r).appendTo(i),i.addClass("error-source").attr({"aria-hidden":!0,hidden:"hidden"}).appendTo(n),n.addClass("error-view").appendTo(e),console.warn(o+"\n\t"+r.replace(/\n/g,"\n\t")),!1}function i(e,t){var r=i;switch(void 0===e?"undefined":_typeof(e)){case"number":if(Number.isNaN(e))return t;break;case"object":if(null===e)return t;if(Array.isArray(e))return e.map(function(e){return r(e,t)}).join(", ");if(e instanceof Set)return[].concat(_toConsumableArray(e)).map(function(e){return r(e,t)}).join(", ");if(e instanceof Map){return"{ "+[].concat(_toConsumableArray(e)).map(function(e){var n=_slicedToArray(e,2),a=n[0],i=n[1];return r(a,t)+" → "+r(i,t)}).join(", ")+" }"}return e instanceof Date?e.toLocaleString():"function"==typeof e.toString?e.toString():Object.prototype.toString.call(e);case"function":case"undefined":return t}return String(e)}return Object.freeze(Object.defineProperties({},{clone:{value:e},convertBreaks:{value:t},safeActiveElement:{value:r},setPageElement:{value:n},throwError:{value:a},toStringOrDefault:{value:i}}))
